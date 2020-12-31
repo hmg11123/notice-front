@@ -71,7 +71,12 @@ const Header = ({ history }) => {
   <HeaderWrapper>
    {/**topHeader */}
    <Wrapper fs={`20px`} height={`75px`} dr={`row`}>
-    <Wrapper width={`30%`} ju={`flex-end`} dr={`row`}>
+    <Wrapper
+     width={`30%`}
+     ju={`flex-end`}
+     dr={`row`}
+     onClick={() => moveLinkHandler("")}
+    >
      LOGO
     </Wrapper>
     <Wrapper width={`40%`} dr={`row`}>
@@ -97,7 +102,9 @@ const Header = ({ history }) => {
      {/* </SearchBox> */}
     </Wrapper>
     <Wrapper width={`30%`} ju={`flex-start`} dr={`row`}>
-     <ActionP padding={`10px`}>로그인</ActionP>
+     <ActionP padding={`10px`} onClick={() => moveLinkHandler(`SignIN`)}>
+      로그인
+     </ActionP>
      <ActionP
       padding={`10px`}
       margin={`0px 0px 0px 10px`}

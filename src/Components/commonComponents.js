@@ -112,7 +112,7 @@ export const PagenationBtn = styled.div`
  }
 `;
 
-export const TextBox = styled.input`
+export const TextInput = styled.input`
  outline: none;
  border: none;
  background: none;

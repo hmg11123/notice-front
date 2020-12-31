@@ -1,12 +1,19 @@
 import React from "react";
 import {
  Wrapper,
- TextBox,
+ TextInput,
  TitleBox,
  CheckBtn,
 } from "../../../Components/commonComponents";
 
-const MM01Presenter = ({}) => {
+const MM01Presenter = ({
+ newName,
+ newEmail,
+ newNickName,
+ passWord,
+ checkedPassword,
+ createUserHandler,
+}) => {
  return (
   <Wrapper margin={`50px 0px`}>
    <Wrapper>
@@ -14,44 +21,49 @@ const MM01Presenter = ({}) => {
      회원가입
     </TitleBox>
    </Wrapper>
-   <TextBox
+   <TextInput
     type={`text`}
     width={`500px`}
     height={`40px`}
     placeholder={`EMAIL...`}
     margin={`0px 0px 30px 0px`}
     fs={`18px`}
-   ></TextBox>
-   <TextBox
+    {...newEmail}
+   ></TextInput>
+   <TextInput
     type={`text`}
     width={`500px`}
     height={`40px`}
     placeholder={`Name...`}
     margin={`0px 0px 30px 0px`}
-   ></TextBox>
-   <TextBox
+    {...newName}
+   ></TextInput>
+   <TextInput
     type={`text`}
     width={`500px`}
     height={`40px`}
     placeholder={`NickName...`}
     margin={`0px 0px 30px 0px`}
-   ></TextBox>
-   <TextBox
-    type={`text`}
+    {...newNickName}
+   ></TextInput>
+   <TextInput
+    type={`password`}
     width={`500px`}
     height={`40px`}
     placeholder={`PassWord...`}
     margin={`0px 0px 30px 0px`}
-   ></TextBox>
-   <TextBox
-    type={`text`}
+    {...passWord}
+   ></TextInput>
+   <TextInput
+    type={`password`}
     width={`500px`}
     height={`40px`}
     placeholder={`Checked PassWord...`}
     margin={`0px 0px 30px 0px`}
-   ></TextBox>
+    {...checkedPassword}
+   ></TextInput>
 
-   <CheckBtn width={`130px`} height={`40px`}>
+   <CheckBtn width={`130px`} height={`40px`} onClick={createUserHandler}>
     회원가입
    </CheckBtn>
   </Wrapper>

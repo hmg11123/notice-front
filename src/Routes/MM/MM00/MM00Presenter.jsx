@@ -324,12 +324,12 @@ const MM00Presenter = ({
       </Wrapper>
      </Wrapper>
     </Wrapper>
-    <Wrapper>
+    {/* <Wrapper>
      <RealTimeWrapper width={`200px`} margin={`0px 0px 500px 20px`}>
       <LeftWrapper>실시간검색어</LeftWrapper>
       <ActionDiv> 1. 실시간검색어</ActionDiv>
      </RealTimeWrapper>
-    </Wrapper>
+    </Wrapper> */}
    </Wrapper>
    <Wrapper width={`20%`}></Wrapper>
   </Wrapper>
