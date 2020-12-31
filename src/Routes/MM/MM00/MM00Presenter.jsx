@@ -1,25 +1,14 @@
 import React from "react";
-import { Wrapper } from "../../../Components/commonComponents";
+import {
+ Wrapper,
+ ActionP,
+ Pagenation,
+ PagenationBtn,
+ PagenationWrapper,
+} from "../../../Components/commonComponents";
 import styled from "styled-components";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import CircularIndeterminate from "../../../Components/loading/CircularIndeterminate";
-
-const ActionP = styled.p`
- cursor: pointer;
- width: 100px;
- height: 30px;
- background-color: ${(props) => props.theme.whiteColor};
- color: ${(props) => props.theme.subThemeColor};
- border-radius: ${(props) => props.theme.radius};
- font-size: 14px;
- display: flex;
- justify-content: center;
- align-items: center;
- transition: 0.5s;
-
- &:hover {
-  box-shadow: 1px 3px 5px ${(props) => props.theme.blackColor};
- }
-`;
 
 const BoardWrapper = styled.div`
  width: 100%;
@@ -77,21 +66,23 @@ const ActionDiv = styled.div`
 `;
 
 const SliderBox = styled.div`
- width: 230px;
+ width: 200px;
  height: 260px;
  margin: 10px;
  border: 1px solid ${(props) => props.theme.subThemeColor};
  border-radius: ${(props) => props.theme.radius};
 `;
 
-const TitleDiv = styled.div`
- width: 95%;
- height: 100%;
+const TitleBox = styled.div`
+ width: ${(props) => props.width || `100%`};
+ height: ${(props) => props.height || `100%`};
  display: flex;
- justify-content: flex-start;
+ flex-direction: ${(props) => props.dr || `column`};
+ align-items: ${(props) => props.al || `center`};
+ justify-content: ${(props) => props.ju || `center`};
  border-bottom: 3px solid ${(props) => props.theme.grey2Color};
- font-size: 18px;
- font-weight: 600;
+ font-size: ${(props) => props.fs || `16px`};
+ font-weight: ${(props) => props.fw || ``};
  color: ${(props) => props.theme.grey2Color};
 `;
 
@@ -102,7 +93,23 @@ const ImgBox = styled.img`
  border-radius: 5px;
 `;
 
-const MM00Presenter = ({ noticeBannerDatum, popularGalleryBannerDatum }) => {
+const WrapWrapper = styled(Wrapper)`
+ width: 1350px;
+ flex-wrap: wrap;
+`;
+
+const MM00Presenter = ({
+ noticeBannerDatum,
+ popularGalleryBannerDatum,
+ pages,
+ prevAndNextPageChangeNoticeHandler,
+ currentPage,
+ limit,
+ changePageHandler,
+ SoprtsBannerDatum,
+ HobbyBannerDatum,
+ GameBannerDatum,
+}) => {
  return (
   <Wrapper>
    <Wrapper width={`20%`}></Wrapper>
@@ -111,18 +118,55 @@ const MM00Presenter = ({ noticeBannerDatum, popularGalleryBannerDatum }) => {
      {/** top */}
      <Wrapper>
       <Wrapper>
-       <TitleDiv>
-        <Wrapper>인기 겔러리</Wrapper>
-       </TitleDiv>
+       <TitleBox dr={`row`} width={`95%`} fs={`18px`} fw={`600`}>
+        <Wrapper al={`flex-start`} fs={`18px`}>
+         인기 겔러리
+        </Wrapper>
+        {/**페이지 네이션 */}
+        <Wrapper ju={`flex-end`} dr={`row`}>
+         {pages && pages.length > 0 && (
+          <PagenationWrapper width={`auto`}>
+           <PagenationBtn
+            onClick={() =>
+             popularGalleryBannerDatum &&
+             prevAndNextPageChangeNoticeHandler(currentPage - 1)
+            }
+           >
+            <IoIosArrowBack />
+           </PagenationBtn>
+           {pages.map((data) => {
+            return (
+             <Pagenation
+              className={data === currentPage ? `active` : ``}
+              key={data}
+              onClick={() => changePageHandler(data)}
+             >
+              {console.log(popularGalleryBannerDatum)}
+              {data + 1}
+             </Pagenation>
+            );
+           })}
+           <PagenationBtn
+            onClick={() =>
+             popularGalleryBannerDatum &&
+             prevAndNextPageChangeNoticeHandler(currentPage + 1)
+            }
+           >
+            <IoIosArrowForward />
+           </PagenationBtn>
+          </PagenationWrapper>
+         )}
+        </Wrapper>
+       </TitleBox>
        <Wrapper dr={`row`}>
-        {popularGalleryBannerDatum ? (
-         popularGalleryBannerDatum.length === 0 ? (
-          <Wrapper>인기겔러리가 없습니다.</Wrapper>
-         ) : (
-          popularGalleryBannerDatum.map((data, idx) => {
-           return (
-            <Wrapper key={idx}>
-             <SliderBox>
+        <WrapWrapper dr={`row`}>
+         {popularGalleryBannerDatum ? (
+          popularGalleryBannerDatum.length === 0 ? (
+           <Wrapper>인기겔러리가 없습니다.</Wrapper>
+          ) : (
+           popularGalleryBannerDatum.map((data, idx) => {
+            return (
+             <SliderBox key={idx}>
               <Wrapper>
                <ImgBox src={data.imgPath} />
                <Wrapper height={`40px`} margin={`0px 10px 0px 0px`} fw={`600`}>
@@ -133,7 +177,48 @@ const MM00Presenter = ({ noticeBannerDatum, popularGalleryBannerDatum }) => {
                </Wrapper>
               </Wrapper>
              </SliderBox>
-            </Wrapper>
+            );
+           })
+          )
+         ) : (
+          <CircularIndeterminate />
+         )}
+        </WrapWrapper>
+       </Wrapper>
+      </Wrapper>
+     </Wrapper>
+     {/*///////////////////////
+      * ////////bottom/////////
+      * ///////////////////////*/}
+     <Wrapper>
+      <Wrapper dr={`row`}>
+       <Wrapper width={`10%`}></Wrapper>
+       <Wrapper width={`40%`}>
+        <Wrapper bc={`#2d98da`} color={`#fff`} dr={`row`}>
+         <Wrapper al={`flex-start`}>공지사항</Wrapper>
+         <ActionP width={`100px`} height={`30px`} fs={`14px`}>
+          더보기
+         </ActionP>
+        </Wrapper>
+        {noticeBannerDatum ? (
+         noticeBannerDatum.length === 0 ? (
+          <Wrapper>공지사항이 없습니다.</Wrapper>
+         ) : (
+          noticeBannerDatum.map((data, idx) => {
+           return (
+            <BoardWrapper key={idx}>
+             <Wrapper width={`200px`} padding={`none`} al={`flex-start`}>
+              {data.type}
+             </Wrapper>
+             <Wrapper
+              margin={`0px 0px 0px 10px`}
+              padding={`none`}
+              al={`flex-start`}
+             >
+              {data.title}
+             </Wrapper>
+             <Wrapper al={`flex-start`}>{data.createdAt}</Wrapper>
+            </BoardWrapper>
            );
           })
          )
@@ -141,54 +226,106 @@ const MM00Presenter = ({ noticeBannerDatum, popularGalleryBannerDatum }) => {
          <CircularIndeterminate />
         )}
        </Wrapper>
-      </Wrapper>
-     </Wrapper>
-     {/** bottom */}
-     <Wrapper dr={`row`}>
-      <Wrapper width={`10%`}></Wrapper>
-      <Wrapper width={`40%`}>
-       <Wrapper bc={`#2d98da`} color={`#fff`} dr={`row`}>
-        <Wrapper al={`flex-start`}>공지사항</Wrapper>
-        <ActionP>더보기</ActionP>
-       </Wrapper>
-       {noticeBannerDatum ? (
-        noticeBannerDatum.length === 0 ? (
-         <Wrapper>공지사항이 없습니다.</Wrapper>
+       <Wrapper width={`40%`} margin={`0px 0px 0px 20px`}>
+        <Wrapper bc={`#2d98da`} color={`#fff`} dr={`row`}>
+         <Wrapper al={`flex-start`}>스포츠</Wrapper>
+         <ActionP width={`100px`} height={`30px`} fs={`14px`}>
+          더보기
+         </ActionP>
+        </Wrapper>
+        {SoprtsBannerDatum ? (
+         SoprtsBannerDatum.length === 0 ? (
+          <Wrapper>게시글이 없습니다.</Wrapper>
+         ) : (
+          SoprtsBannerDatum.map((data, idx) => {
+           return (
+            <BoardWrapper key={idx}>
+             <Wrapper
+              margin={`0px 0px 0px 10px`}
+              padding={`none`}
+              al={`flex-start`}
+             >
+              {data.title}
+             </Wrapper>
+             <Wrapper al={`flex-start`}>{data.createdAt}</Wrapper>
+            </BoardWrapper>
+           );
+          })
+         )
         ) : (
-         noticeBannerDatum.map((data, idx) => {
-          return (
-           <BoardWrapper key={idx}>
-            <Wrapper width={`200px`} padding={`none`} al={`flex-start`}>
-             {data.type}
-            </Wrapper>
-            <Wrapper
-             margin={`0px 0px 0px 10px`}
-             padding={`none`}
-             al={`flex-start`}
-            >
-             {data.title}
-            </Wrapper>
-            <Wrapper al={`flex-start`}>{data.createdAt}</Wrapper>
-           </BoardWrapper>
-          );
-         })
-        )
-       ) : (
-        <CircularIndeterminate />
-       )}
-      </Wrapper>
-      <Wrapper width={`40%`} margin={`0px 0px 0px 20px`}>
-       <Wrapper bc={`#2d98da`} color={`#fff`} dr={`row`}>
-        <Wrapper al={`flex-start`}>뭘넣지?</Wrapper>
-        <ActionP>더보기</ActionP>
+         <CircularIndeterminate />
+        )}
        </Wrapper>
-       <BoardWrapper>인기게시판</BoardWrapper>
+       <Wrapper width={`10%`}></Wrapper>
       </Wrapper>
-      <Wrapper width={`10%`}></Wrapper>
+      <Wrapper dr={`row`}>
+       <Wrapper width={`10%`}></Wrapper>
+       <Wrapper width={`40%`}>
+        <Wrapper bc={`#2d98da`} color={`#fff`} dr={`row`}>
+         <Wrapper al={`flex-start`}>취미</Wrapper>
+         <ActionP width={`100px`} height={`30px`} fs={`14px`}>
+          더보기
+         </ActionP>
+        </Wrapper>
+        {HobbyBannerDatum ? (
+         HobbyBannerDatum.length === 0 ? (
+          <Wrapper>게시글이 없습니다.</Wrapper>
+         ) : (
+          HobbyBannerDatum.map((data, idx) => {
+           return (
+            <BoardWrapper key={idx}>
+             <Wrapper
+              margin={`0px 0px 0px 10px`}
+              padding={`none`}
+              al={`flex-start`}
+             >
+              {data.title}
+             </Wrapper>
+             <Wrapper al={`flex-start`}>{data.createdAt}</Wrapper>
+            </BoardWrapper>
+           );
+          })
+         )
+        ) : (
+         <CircularIndeterminate />
+        )}
+       </Wrapper>
+       <Wrapper width={`40%`} margin={`0px 0px 0px 20px`}>
+        <Wrapper bc={`#2d98da`} color={`#fff`} dr={`row`}>
+         <Wrapper al={`flex-start`}>게임</Wrapper>
+         <ActionP width={`100px`} height={`30px`} fs={`14px`}>
+          더보기
+         </ActionP>
+        </Wrapper>
+        {GameBannerDatum ? (
+         GameBannerDatum.length === 0 ? (
+          <Wrapper>게시글이 없습니다.</Wrapper>
+         ) : (
+          GameBannerDatum.map((data, idx) => {
+           return (
+            <BoardWrapper key={idx}>
+             <Wrapper
+              margin={`0px 0px 0px 10px`}
+              padding={`none`}
+              al={`flex-start`}
+             >
+              {data.title}
+             </Wrapper>
+             <Wrapper al={`flex-start`}>{data.createdAt}</Wrapper>
+            </BoardWrapper>
+           );
+          })
+         )
+        ) : (
+         <CircularIndeterminate />
+        )}
+       </Wrapper>
+       <Wrapper width={`10%`}></Wrapper>
+      </Wrapper>
      </Wrapper>
     </Wrapper>
-    <Wrapper width={`300px`}>
-     <RealTimeWrapper width={`100%`} margin={`0px 0px 0px 20px`}>
+    <Wrapper>
+     <RealTimeWrapper width={`200px`} margin={`0px 0px 500px 20px`}>
       <LeftWrapper>실시간검색어</LeftWrapper>
       <ActionDiv> 1. 실시간검색어</ActionDiv>
      </RealTimeWrapper>
@@ -200,14 +337,3 @@ const MM00Presenter = ({ noticeBannerDatum, popularGalleryBannerDatum }) => {
 };
 
 export default MM00Presenter;
-
-{
- /* <Wrapper>
-<SliderBox>
- <Wrapper>
-  <Wrapper>사진</Wrapper>
-  <Wrapper height={`40px`}>제목</Wrapper>
- </Wrapper>
-</SliderBox>
-</Wrapper> */
-}

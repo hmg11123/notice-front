@@ -63,9 +63,9 @@ const ActionP = styled.p`
  }
 `;
 
-const Header = () => {
+const Header = ({ history }) => {
  const moveLinkHandler = (link) => {
-  history.push(link);
+  history.push(`/${link}`);
  };
  return (
   <HeaderWrapper>
@@ -97,9 +97,13 @@ const Header = () => {
      {/* </SearchBox> */}
     </Wrapper>
     <Wrapper width={`30%`} ju={`flex-start`} dr={`row`}>
-     <ActionP padding={`10px`}>Sign IN</ActionP>
-     <ActionP padding={`10px`} margin={`0px 0px 0px 10px`}>
-      Sign UP
+     <ActionP padding={`10px`}>로그인</ActionP>
+     <ActionP
+      padding={`10px`}
+      margin={`0px 0px 0px 10px`}
+      onClick={() => moveLinkHandler(`SignUP`)}
+     >
+      회원가입
      </ActionP>
     </Wrapper>
    </Wrapper>
@@ -107,16 +111,22 @@ const Header = () => {
    <Wrapper width={`100%`} height={`75px`} dr={`row`}>
     <Wrapper width={`60%`} ju={`space-between`} dr={`row`}>
      <ActionP padding={`10px`} margin={`10px`}>
-      인기게시판
-     </ActionP>
-     <ActionP padding={`10px`} margin={`10px`}>
-      자유게시판
-     </ActionP>
-     <ActionP padding={`10px`} margin={`10px`}>
       인기겔러리
      </ActionP>
      <ActionP padding={`10px`} margin={`10px`}>
       겔러리
+     </ActionP>
+     <ActionP padding={`10px`} margin={`10px`}>
+      게임
+     </ActionP>
+     <ActionP padding={`10px`} margin={`10px`}>
+      영화
+     </ActionP>
+     <ActionP padding={`10px`} margin={`10px`}>
+      스포츠
+     </ActionP>
+     <ActionP padding={`10px`} margin={`10px`}>
+      취미
      </ActionP>
      <ActionP padding={`10px`} margin={`10px`}>
       뉴스
