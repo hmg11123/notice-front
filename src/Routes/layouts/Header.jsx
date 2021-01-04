@@ -102,22 +102,46 @@ const Header = ({ history }) => {
      {/* </SearchBox> */}
     </Wrapper>
     <Wrapper width={`30%`} ju={`flex-start`} dr={`row`}>
-     <ActionP padding={`10px`} onClick={() => moveLinkHandler(`SignIN`)}>
-      {window.localStorage.getItem(`json`) ? "로그아웃" : "로그인"}
-     </ActionP>
-     <ActionP
-      padding={`10px`}
-      margin={`0px 0px 0px 10px`}
-      onClick={() => moveLinkHandler(`SignUP`)}
-     >
-      {window.localStorage.getItem(`json`) ? "마이페이지" : "회원가입"}
-     </ActionP>
+     {window.localStorage.getItem(`login`) ? (
+      <ActionP
+       padding={`10px`}
+       onClick={() => localStorage.removeItem("login")}
+      >
+       로그아웃
+      </ActionP>
+     ) : (
+      <ActionP padding={`10px`} onClick={() => moveLinkHandler(`SignIN`)}>
+       로그인
+      </ActionP>
+     )}
+
+     {window.localStorage.getItem(`login`) ? (
+      <ActionP
+       padding={`10px`}
+       margin={`0px 0px 0px 10px`}
+       onClick={() => moveLinkHandler(`SignUP`)}
+      >
+       마이페이지
+      </ActionP>
+     ) : (
+      <ActionP
+       padding={`10px`}
+       margin={`0px 0px 0px 10px`}
+       onClick={() => moveLinkHandler(`SignUP`)}
+      >
+       회원가입
+      </ActionP>
+     )}
     </Wrapper>
    </Wrapper>
    {/**bottomHeader */}
    <Wrapper width={`100%`} height={`75px`} dr={`row`}>
     <Wrapper width={`60%`} ju={`space-between`} dr={`row`}>
-     <ActionP padding={`10px`} margin={`10px`}>
+     <ActionP
+      padding={`10px`}
+      margin={`10px`}
+      onClick={() => moveLinkHandler(`PopularGallery`)}
+     >
       인기겔러리
      </ActionP>
      <ActionP padding={`10px`} margin={`10px`}>

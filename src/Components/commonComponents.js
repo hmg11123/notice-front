@@ -153,3 +153,50 @@ export const CheckBtn = styled.button`
   color: ${(props) => props.theme.checkColor};
  }
 `;
+
+export const TopBoard = styled.div`
+ width: ${(props) => props.width || `100%`};
+ height: ${(props) => props.height || `100%`};
+ margin: ${(props) => props.margin || ``};
+ padding: ${(props) => props.padding || `10px`};
+ font-size: ${(props) => props.fs || `16px`};
+ font-weight: ${(props) => props.fw || ``};
+ display: flex;
+ border-top: 3px solid ${(props) => props.theme.pointColor};
+ border-bottom: 1px solid ${(props) => props.theme.pointColor};
+`;
+export const BottomBoard = styled.div`
+ width: ${(props) => props.width || `100%`};
+ height: ${(props) => props.height || `100%`};
+ margin: ${(props) => props.margin || ``};
+ padding: ${(props) => props.padding || `10px`};
+ font-size: ${(props) => props.fs || `16px`};
+ font-weight: ${(props) => props.fw || ``};
+ display: flex;
+ border-bottom: 1px solid ${(props) => props.theme.grey3Color};
+ transition: 0.5s;
+ &:hover {
+  background-color: ${(props) => props.theme.grey4Color};
+ }
+`;
+
+export const WriteBtn = styled.div`
+ width: ${(props) => props.width || `100%`};
+ height: ${(props) => props.height || `100%`};
+ margin: ${(props) => props.margin || ``};
+ padding: ${(props) => props.padding || `10px`};
+ font-size: ${(props) => props.fs || `16px`};
+ font-weight: ${(props) => props.fw || ``};
+ background-color: ${(props) => props.theme.pointColor};
+ color: ${(props) => props.theme.whiteColor};
+ display: flex;
+ align-items: ${(props) => props.al || `center`};
+ justify-content: ${(props) => props.ju || `center`};
+ cursor: pointer;
+ transition: 0.5s;
+ &:hover {
+  background-color: ${(props) => props.theme.whiteColor};
+  color: ${(props) => props.theme.pointColor};
+  border: 1px solid ${(props) => props.theme.pointColor};
+ }
+`;

@@ -141,7 +141,6 @@ const MM00Presenter = ({
               key={data}
               onClick={() => changePageHandler(data)}
              >
-              {console.log(popularGalleryBannerDatum)}
               {data + 1}
              </Pagenation>
             );

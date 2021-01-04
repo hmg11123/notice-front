@@ -11,6 +11,7 @@ const MM02Container = ({ history }) => {
  const [isDialogOpen, setIsDialogOpen] = useState(false);
  const inputEmail = useInput("");
  const code = useInput("");
+ const [skip, setSkip] = useState(true);
 
  ////////// USE REF      //////////
 
@@ -59,14 +60,16 @@ const MM02Container = ({ history }) => {
 
  const checkCode = async () => {
   const json = getUserData.getUser;
-  if (secretCodeData.checkCode.secretCode === code.value) {
-   window.localStorage.setItem("json", JSON.stringify(json));
-   moveLinkHandler("");
 
+  if (secretCodeData.checkCode.secretCode === code.value) {
+   window.localStorage.setItem("login", JSON.stringify(json));
+   moveLinkHandler("");
+   setSkip(false);
    console.log("성공");
+  } else if (!code.value || code.value.trim() === "") {
+   alert("인증코드를 입력하세요");
   } else {
-   console.log(secretCodeData.checkCode.secretCodeData);
-   console.log(code);
+   alert("인증코드가 틀렸습니다");
   }
  };
 

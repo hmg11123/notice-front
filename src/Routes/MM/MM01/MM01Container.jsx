@@ -58,7 +58,6 @@ const MM01Container = ({ history }) => {
     deletedAt: deletedAt.value,
    },
   }).then(moveLinkHandler("SignIN"));
-  console.log(data);
  };
 
  ////////// USE EFFECT   //////////
