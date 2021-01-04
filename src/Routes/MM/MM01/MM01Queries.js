@@ -5,7 +5,7 @@ export const CREATE_USER = gql`
   $email: String!
   $nickName: String!
   $name: String!
-  $passWord: String!
+  $mobile: String!
   $isDelete: Boolean!
   $deletedAt: String!
  ) {
@@ -13,7 +13,7 @@ export const CREATE_USER = gql`
    email: $email
    nickName: $nickName
    name: $name
-   passWord: $passWord
+   mobile: $mobile
    isDelete: $isDelete
    deletedAt: $deletedAt
   )

@@ -103,14 +103,14 @@ const Header = ({ history }) => {
     </Wrapper>
     <Wrapper width={`30%`} ju={`flex-start`} dr={`row`}>
      <ActionP padding={`10px`} onClick={() => moveLinkHandler(`SignIN`)}>
-      로그인
+      {window.localStorage.getItem(`json`) ? "로그아웃" : "로그인"}
      </ActionP>
      <ActionP
       padding={`10px`}
       margin={`0px 0px 0px 10px`}
       onClick={() => moveLinkHandler(`SignUP`)}
      >
-      회원가입
+      {window.localStorage.getItem(`json`) ? "마이페이지" : "회원가입"}
      </ActionP>
     </Wrapper>
    </Wrapper>

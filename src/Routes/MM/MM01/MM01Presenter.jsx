@@ -10,8 +10,7 @@ const MM01Presenter = ({
  newName,
  newEmail,
  newNickName,
- passWord,
- checkedPassword,
+ newMobile,
  createUserHandler,
 }) => {
  return (
@@ -47,20 +46,12 @@ const MM01Presenter = ({
     {...newNickName}
    ></TextInput>
    <TextInput
-    type={`password`}
+    type={`text`}
     width={`500px`}
     height={`40px`}
-    placeholder={`PassWord...`}
+    placeholder={`Mobile...`}
     margin={`0px 0px 30px 0px`}
-    {...passWord}
-   ></TextInput>
-   <TextInput
-    type={`password`}
-    width={`500px`}
-    height={`40px`}
-    placeholder={`Checked PassWord...`}
-    margin={`0px 0px 30px 0px`}
-    {...checkedPassword}
+    {...newMobile}
    ></TextInput>
 
    <CheckBtn width={`130px`} height={`40px`} onClick={createUserHandler}>

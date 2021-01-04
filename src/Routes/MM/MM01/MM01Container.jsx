@@ -4,7 +4,7 @@ import useInput from "../../../Hooks/useInput";
 import { CREATE_USER } from "./MM01Queries";
 import { useMutation } from "react-apollo-hooks";
 
-const MM01Container = () => {
+const MM01Container = ({ history }) => {
  ////////// VARIABLE     //////////
 
  ////////// USE SATETE   //////////
@@ -12,8 +12,7 @@ const MM01Container = () => {
  const newName = useInput("");
  const newEmail = useInput("");
  const newNickName = useInput("");
- const passWord = useInput("");
- const checkedPassword = useInput("");
+ const newMobile = useInput("");
  const isDelete = useInput(false);
  const deletedAt = useInput("none");
 
@@ -28,6 +27,9 @@ const MM01Container = () => {
  const [createUserMutation] = useMutation(CREATE_USER);
 
  ////////// HANDLER      //////////
+ const moveLinkHandler = (link) => {
+  history.push(`/${link}`);
+ };
  const createUserHandler = async () => {
   if (!newEmail.value || newEmail.value.trim() === "") {
    alert("이메일은 필수 입력사항 입니다.");
@@ -41,12 +43,8 @@ const MM01Container = () => {
    alert("닉네임은 필수 입력사항 입니다.");
    return;
   }
-  if (!passWord.value || passWord.value.trim() === "") {
-   alert("비밀번호는 필수 입력사항 입니다.");
-   return;
-  }
-  if (passWord.value !== checkedPassword.value) {
-   alert("비밀번호가 다릅니다");
+  if (!newMobile.value || newMobile.value.trim() === "") {
+   alert("전화번호는 필수 입력사항 입니다.");
    return;
   }
 
@@ -55,11 +53,11 @@ const MM01Container = () => {
     name: newName.value,
     email: newEmail.value,
     nickName: newNickName.value,
-    passWord: passWord.value,
+    mobile: newMobile.value,
     isDelete: isDelete.value,
     deletedAt: deletedAt.value,
    },
-  });
+  }).then(moveLinkHandler("SignIN"));
   console.log(data);
  };
 
@@ -71,8 +69,7 @@ const MM01Container = () => {
    newName={newName}
    newEmail={newEmail}
    newNickName={newNickName}
-   passWord={passWord}
-   checkedPassword={checkedPassword}
+   newMobile={newMobile}
    createUserHandler={createUserHandler}
   ></MM01Presenter>
  );
