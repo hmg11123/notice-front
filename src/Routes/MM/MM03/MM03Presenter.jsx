@@ -20,6 +20,7 @@ const MM03Presenter = ({
  currentPage,
  setCurrentPage,
  pages,
+ moveLinkHandler,
  changePageHandler,
  prevAndNextPageChangeNoticeHandler,
 }) => {
@@ -64,7 +65,7 @@ const MM03Presenter = ({
       ) : (
        popularGalleryBannerDatum.map((data, idx) => {
         return (
-         <BottomBoard key={idx}>
+         <BottomBoard key={idx} onClick={() => moveLinkHandler(data._id)}>
           <Wrapper width={`5%`} padding={`5px`}>
            번호
           </Wrapper>

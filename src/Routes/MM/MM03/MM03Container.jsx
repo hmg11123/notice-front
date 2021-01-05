@@ -7,7 +7,7 @@ import {
 } from "./MM03Queries";
 import { toast } from "react-toastify";
 
-const MM03Container = () => {
+const MM03Container = ({ history }) => {
  ////////// VARIABLE     //////////
  ////////// USE SATETE   //////////
  const [searchValue, setSearchValue] = useState("");
@@ -96,6 +96,9 @@ const MM03Container = () => {
 
   setCurrentPage(page);
  };
+ const moveLinkHandler = (idx) => {
+  history.push(`/Board_D/${idx}`);
+ };
  return (
   <MM03Presenter
    popularGalleryBannerDatum={
@@ -105,6 +108,7 @@ const MM03Container = () => {
    searchValue={searchValue}
    setSearchValue={setSearchValue}
    currentPage={currentPage}
+   moveLinkHandler={moveLinkHandler}
    setCurrentPage={setCurrentPage}
    pages={pages}
    changePageHandler={changePageHandler}

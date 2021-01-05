@@ -200,3 +200,29 @@ export const WriteBtn = styled.div`
   border: 1px solid ${(props) => props.theme.pointColor};
  }
 `;
+
+export const ContentBox = styled.div`
+ width: ${(props) => props.width || `100%`};
+ height: ${(props) => props.height || `100%`};
+ margin: ${(props) => props.margin || ``};
+ padding: ${(props) => props.padding || `10px`};
+ font-size: ${(props) => props.fs || `16px`};
+ font-weight: ${(props) => props.fw || ``};
+
+ background-color: ${(props) => props.bc || ``};
+ color: ${(props) => props.color || ``};
+ display: flex;
+ flex-direction: ${(props) => props.dr || `column`};
+ align-items: ${(props) => props.al || `center`};
+ justify-content: ${(props) => props.ju || `center`};
+ flex-wrap: ${(props) => props.wr || ``};
+ border: 1.5px solid ${(props) => props.theme.pointColor};
+`;
+
+export const ImgBox = styled.img`
+ width: ${(props) => props.width || `100%`};
+ height: ${(props) => props.height || `100%`};
+ margin: ${(props) => props.margin || ``};
+ padding: ${(props) => props.padding || `10px`};
+ border-radius: ${(props) => props.theme.radius};
+`;

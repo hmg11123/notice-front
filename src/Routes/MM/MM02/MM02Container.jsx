@@ -18,23 +18,25 @@ const MM02Container = ({ history }) => {
  ////////// USE CONTEXT  //////////
 
  ////////// USE QUERY    //////////
- const { data: secretCodeData, refetch: secretCodeRefetch } = useQuery(
-  CHECK_CODE,
-  {
-   variables: {
-    email: inputEmail.value,
-   },
-  }
- );
+ //  const { data: secretCodeData, refetch: secretCodeRefetch } = useQuery(
+ //   CHECK_CODE,
+ //   {
+ //    variables: {
+ //     email: inputEmail.value,
+ //    },
+ //   }
+ //  );
 
- const { data: getUserData, refetch: getUserRefetch } = useQuery(GET_USER, {
-  variables: {
-   email: inputEmail.value,
-  },
- });
+ //  const { data: getUserData, refetch: getUserRefetch } = useQuery(GET_USER, {
+ //   variables: {
+ //    email: inputEmail.value,
+ //   },
+ //  });
 
  ////////// USE MUTATION //////////
  const [tryLoginMutation] = useMutation(TRY_LOGIN);
+ const [secretCodeMutation] = useMutation(CHECK_CODE);
+ const [getUserMutation] = useMutation(GET_USER);
 
  ////////// HANDLER      //////////
 
@@ -52,17 +54,34 @@ const MM02Container = ({ history }) => {
     email: inputEmail.value,
    },
   }).then(setIsDialogOpen(!isDialogOpen));
-  secretCodeRefetch();
  };
  const _isDialogOpenToggle = () => {
   setIsDialogOpen(!isDialogOpen);
  };
 
- const checkCode = async () => {
-  const json = getUserData.getUser;
+ const userData = async () => {
+  const { data } = await getUserMutation({
+   variables: {
+    email: inputEmail.value,
+    secretCode: code.value,
+   },
+  });
 
-  if (secretCodeData.checkCode.secretCode === code.value) {
-   window.localStorage.setItem("login", JSON.stringify(json));
+  return { data };
+ };
+
+ const checkCode = async () => {
+  const { data } = await secretCodeMutation({
+   variables: {
+    email: inputEmail.value,
+   },
+  });
+
+  if (data.checkCode.secretCode === code.value) {
+   window.localStorage.setItem(
+    "login",
+    JSON.stringify((await userData()).data)
+   );
    moveLinkHandler("");
    setSkip(false);
    console.log("성공");

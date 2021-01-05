@@ -67,6 +67,10 @@ const Header = ({ history }) => {
  const moveLinkHandler = (link) => {
   history.push(`/${link}`);
  };
+ const logout = (link) => {
+  history.push(`/${link}`);
+  localStorage.removeItem("login");
+ };
  return (
   <HeaderWrapper>
    {/**topHeader */}
@@ -103,10 +107,7 @@ const Header = ({ history }) => {
     </Wrapper>
     <Wrapper width={`30%`} ju={`flex-start`} dr={`row`}>
      {window.localStorage.getItem(`login`) ? (
-      <ActionP
-       padding={`10px`}
-       onClick={() => localStorage.removeItem("login")}
-      >
+      <ActionP padding={`10px`} onClick={() => logout(``)}>
        로그아웃
       </ActionP>
      ) : (

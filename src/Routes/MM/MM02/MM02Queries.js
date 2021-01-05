@@ -7,7 +7,7 @@ export const TRY_LOGIN = gql`
 `;
 
 export const CHECK_CODE = gql`
- query checkCode($email: String!) {
+ mutation checkCode($email: String!) {
   checkCode(email: $email) {
    secretCode
   }
@@ -15,8 +15,8 @@ export const CHECK_CODE = gql`
 `;
 
 export const GET_USER = gql`
- query getUser($email: String!) {
-  getUser(email: $email) {
+ mutation getUser($email: String!, $secretCode: String!) {
+  getUser(email: $email, secretCode: $secretCode) {
    email
    nickName
    name
