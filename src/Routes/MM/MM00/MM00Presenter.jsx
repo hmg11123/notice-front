@@ -172,7 +172,7 @@ const MM00Presenter = ({
                 {data.title}
                </Wrapper>
                <Wrapper height={`40px`} margin={`0px 10px 0px 0px`}>
-                {data.description}
+                {data.description.substring(0, 18) + "..."}
                </Wrapper>
               </Wrapper>
              </SliderBox>

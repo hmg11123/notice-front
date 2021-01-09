@@ -26,8 +26,8 @@ export const TitleBox = styled.div`
  flex-direction: ${(props) => props.dr || `column`};
  align-items: ${(props) => props.al || `center`};
  justify-content: ${(props) => props.ju || `center`};
- font-size: ${(props) => props.fs || `16px`};
- font-weight: ${(props) => props.fw || ``};
+ font-size: ${(props) => props.fs || `25px`};
+ font-weight: ${(props) => props.fw || `600`};
  color: ${(props) => props.theme.grey2Color};
 `;
 
@@ -139,6 +139,7 @@ export const CheckBtn = styled.button`
  outline: none;
  border: none;
  background: none;
+ margin: ${(props) => props.margin};
  width: ${(props) => props.width || `100%`};
  height: ${(props) => props.height || `100%`};
  background-color: ${(props) => props.theme.checkColor};
@@ -149,8 +150,29 @@ export const CheckBtn = styled.button`
  transition: 0.5s;
 
  &:hover {
+  border: 1px solid ${(props) => props.theme.checkColor};
   background-color: ${(props) => props.theme.whiteColor};
   color: ${(props) => props.theme.checkColor};
+ }
+`;
+
+export const CancelBtn = styled.button`
+ outline: none;
+ border: none;
+ background: none;
+ width: ${(props) => props.width || `100%`};
+ height: ${(props) => props.height || `100%`};
+ background-color: ${(props) => props.theme.greyColor};
+ color: ${(props) => props.theme.whiteColor};
+ font-size: ${(props) => props.fs || `16px`};
+ border-radius: ${(props) => props.theme.radius};
+ cursor: pointer;
+ transition: 0.5s;
+
+ &:hover {
+  border: 1px solid ${(props) => props.theme.greyColor};
+  background-color: ${(props) => props.theme.whiteColor};
+  color: ${(props) => props.theme.greyColor};
  }
 `;
 
@@ -225,4 +247,43 @@ export const ImgBox = styled.img`
  margin: ${(props) => props.margin || ``};
  padding: ${(props) => props.padding || `10px`};
  border-radius: ${(props) => props.theme.radius};
+ background-size: cover;
+ background-clip: none;
+`;
+
+export const TextArea = styled.textarea`
+ width: ${(props) => props.width};
+ height: ${(props) => props.height || `100px`};
+ border: 1px solid ${(props) => props.theme.pointColor};
+ padding: ${(props) => props.padding || `10px`};
+ border-radius: ${(props) => props.theme.radius};
+ transition: ${(props) => props.transition || props.theme.transition};
+ margin: ${(props) => props.margin};
+ resize: none;
+
+ &:focus {
+  box-shadow: ${(props) => props.theme.boxShadow};
+  border: 1px solid ${(props) => props.theme.pointColor};
+ }
+`;
+
+export const OriginFileBtn = styled.input`
+ display: none;
+`;
+
+export const FileBtn = styled.label`
+ width: 100px;
+ height: 40px;
+ margin: ${(props) => props.margin || ``};
+ padding: ${(props) => props.padding || `10px`};
+ background-color: ${(props) => props.theme.pointColor};
+ color: ${(props) => props.theme.whiteColor};
+ cursor: pointer;
+ transition: 0.5s;
+ text-align: center;
+ &:hover {
+  background-color: ${(props) => props.theme.whiteColor};
+  color: ${(props) => props.theme.pointColor};
+  border: 1px solid ${(props) => props.theme.pointColor};
+ }
 `;

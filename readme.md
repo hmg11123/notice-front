@@ -13,3 +13,4 @@
 - [ ] MM10 : JOIN BOARD
 - [ ] MM11 : NOTICE BOARD
 - [ ] MM12 : QNA
+- [ ] MM13 : MYPAGE

@@ -69,7 +69,7 @@ const Header = ({ history }) => {
  };
  const logout = (link) => {
   history.push(`/${link}`);
-  localStorage.removeItem("login");
+  sessionStorage.removeItem("login");
  };
  return (
   <HeaderWrapper>
@@ -106,7 +106,7 @@ const Header = ({ history }) => {
      {/* </SearchBox> */}
     </Wrapper>
     <Wrapper width={`30%`} ju={`flex-start`} dr={`row`}>
-     {window.localStorage.getItem(`login`) ? (
+     {window.sessionStorage.getItem(`login`) ? (
       <ActionP padding={`10px`} onClick={() => logout(``)}>
        로그아웃
       </ActionP>
@@ -116,7 +116,7 @@ const Header = ({ history }) => {
       </ActionP>
      )}
 
-     {window.localStorage.getItem(`login`) ? (
+     {window.sessionStorage.getItem(`login`) ? (
       <ActionP
        padding={`10px`}
        margin={`0px 0px 0px 10px`}

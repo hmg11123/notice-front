@@ -24,6 +24,28 @@ export const GET_ALL_POPULAR_GALLERY = gql`
  }
 `;
 
+export const GET_ALL_POPULAR_GALLERY_LENGTH = gql`
+ query getAllPopularGallerylength($searchValue: String!) {
+  getAllPopularGallerylength(searchValue: $searchValue)
+ }
+`;
+
+export const CREATE_POPULAR_GALLERY = gql`
+ mutation createPopularGallery(
+  $title: String!
+  $author: String!
+  $description: String!
+  $imgPath: String
+ ) {
+  createPopularGallery(
+   title: $title
+   author: $author
+   description: $description
+   imgPath: $imgPath
+  )
+ }
+`;
+
 export const GET_POPULAR_GALLERY_TOTAL_PAGE = gql`
  query getPopularGalleryTotalPage($limit: Int!, $searchValue: String!) {
   getPopularGalleryTotalPage(limit: $limit, searchValue: $searchValue)

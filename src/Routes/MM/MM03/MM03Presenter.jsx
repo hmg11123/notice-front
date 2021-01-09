@@ -22,7 +22,9 @@ const MM03Presenter = ({
  pages,
  moveLinkHandler,
  changePageHandler,
+ totalCnt,
  prevAndNextPageChangeNoticeHandler,
+ writeMoveLinkHandler,
 }) => {
  return (
   <Wrapper dr={`row`}>
@@ -65,9 +67,14 @@ const MM03Presenter = ({
       ) : (
        popularGalleryBannerDatum.map((data, idx) => {
         return (
-         <BottomBoard key={idx} onClick={() => moveLinkHandler(data._id)}>
+         <BottomBoard
+          key={idx}
+          onClick={() => moveLinkHandler(`Board_D/${data._id}`)}
+         >
           <Wrapper width={`5%`} padding={`5px`}>
-           번호
+           {/** 번호 */}
+           {totalCnt - (currentPage * limit + idx) + ""}
+           {/** 번호 */}
           </Wrapper>
           <Wrapper
            width={`50%`}
@@ -81,7 +88,7 @@ const MM03Presenter = ({
            {data.author}
           </Wrapper>
           <Wrapper width={`10%`} padding={`5px`}>
-           {data.createdAt}
+           {data.createdAt.substring(0, 10)}
           </Wrapper>
           <Wrapper width={`10%`} padding={`5px`}>
            {data.hit}
@@ -97,7 +104,7 @@ const MM03Presenter = ({
       <CircularIndeterminate />
      )}
      <Wrapper al={`flex-end`}>
-      <WriteBtn width={`100px`} height={`40px`}>
+      <WriteBtn width={`100px`} height={`40px`} onClick={writeMoveLinkHandler}>
        글쓰기
       </WriteBtn>
      </Wrapper>
