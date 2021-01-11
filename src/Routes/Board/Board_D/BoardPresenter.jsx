@@ -6,9 +6,18 @@ import {
  TopBoard,
  BottomBoard,
  ImgBox,
+ TextInput,
+ TextArea,
+ FileBtn,
+ OriginFileBtn,
 } from "../../../Components/commonComponents";
 import CircularIndeterminate from "../../../Components/loading/CircularIndeterminate";
 import styled from "styled-components";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions";
 
 const Blank = styled.div`
  display: none;
@@ -54,7 +63,14 @@ const OverFlowDiv = styled.div`
 const BoardPresenter = ({
  popularGalleryData,
  deleteHandler,
+ _isDialogOpenToggle,
+ isDialogOpen,
  updateHandler,
+ imagePath,
+ valueTitle,
+ valueDesc,
+ _valueChangeHandler,
+ fileChangeHandler,
 }) => {
  return (
   <Wrapper>
@@ -139,7 +155,7 @@ const BoardPresenter = ({
        <UpdateBtn
         type={`button`}
         value={`글 수정`}
-        onClick={updateHandler}
+        onClick={_isDialogOpenToggle}
        ></UpdateBtn>
        <RemoveBtn
         type={`button`}
@@ -153,6 +169,68 @@ const BoardPresenter = ({
     </ContentBox>
     <Wrapper width={`25%`}></Wrapper>
    </Wrapper>
+   {/* Dialog Area */}
+   {/**====================================================================== */}
+   <Dialog
+    onClose={_isDialogOpenToggle}
+    aria-labelledby="customized-dialog-title"
+    open={isDialogOpen}
+    fullWidth={true}
+   >
+    <DialogTitle
+     id="customized-dialog-title"
+     onClose={_isDialogOpenToggle}
+     // class="dialog_title"
+    >
+     게시글 수정
+    </DialogTitle>
+    <DialogContent>
+     <Wrapper>
+      <Wrapper al={`flex-start`}>제목</Wrapper>
+      <Wrapper dr={`row`}>
+       <Wrapper al={`flex-start`} width={`480px`}>
+        <TextInput
+         width={`250px`}
+         name="title"
+         value={valueTitle}
+         onChange={_valueChangeHandler}
+         placeholder="수정할 제목을 쓰세요"
+        />
+       </Wrapper>
+       <OriginFileBtn type="file" id="uploadImg" onChange={fileChangeHandler} />
+       <FileBtn htmlFor="uploadImg" margin={`0px 0px 30px 0px`}>
+        사진추가
+       </FileBtn>
+      </Wrapper>
+     </Wrapper>
+     <Wrapper>
+      <Wrapper al={`flex-start`}>내용</Wrapper>
+      <Wrapper al={`flex-start`}>
+       <TextArea
+        width={`100%`}
+        height={`300px`}
+        name="desc"
+        value={valueDesc}
+        onChange={_valueChangeHandler}
+        placeholder="수정할 게시글을 쓰세요"
+       />
+      </Wrapper>
+     </Wrapper>
+     <Wrapper>
+      <ImgBox width={`300px`} height={`300px`} src={`${imagePath}`}></ImgBox>
+     </Wrapper>
+    </DialogContent>
+    <DialogActions>
+     <Button color="primary" onClick={updateHandler}>
+      수정하기
+     </Button>
+     <Button color="secondary" onClick={_isDialogOpenToggle}>
+      취소
+     </Button>
+    </DialogActions>
+   </Dialog>
+
+   {/* Dialog Area */}
   </Wrapper>
  );
 };

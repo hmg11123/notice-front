@@ -15,13 +15,6 @@ export const GET_POPULAR_GALLERY = gql`
   }
  }
 `;
-
-export const DELETE_POPULAR_GALLERY = gql`
- mutation deletePopularGallery($id: String!) {
-  deletePopularGallery(id: $id)
- }
-`;
-
 export const UPDATE_POPULAR_GALLERY = gql`
  mutation updatePopularGallery(
   $id: String!
@@ -35,5 +28,11 @@ export const UPDATE_POPULAR_GALLERY = gql`
    description: $description
    imgPath: $imgPath
   )
+ }
+`;
+
+export const DELETE_POPULAR_GALLERY = gql`
+ mutation deletePopularGallery($id: String!) {
+  deletePopularGallery(id: $id)
  }
 `;
