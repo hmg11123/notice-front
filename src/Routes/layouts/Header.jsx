@@ -120,7 +120,7 @@ const Header = ({ history }) => {
       <ActionP
        padding={`10px`}
        margin={`0px 0px 0px 10px`}
-       onClick={() => moveLinkHandler(`SignUP`)}
+       onClick={() => moveLinkHandler(`MyPage`)}
       >
        마이페이지
       </ActionP>

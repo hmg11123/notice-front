@@ -17,6 +17,7 @@ export const CHECK_CODE = gql`
 export const GET_USER = gql`
  mutation getUser($email: String!, $secretCode: String!) {
   getUser(email: $email, secretCode: $secretCode) {
+   _id
    email
    nickName
    name

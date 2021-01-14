@@ -112,6 +112,7 @@ const BoardContainer = ({ match, history }) => {
    toast.error("로그인 후 이용해주세요");
   }
  };
+
  const fileChangeHandler = async (e) => {
   const originFile = e.target.files[0];
   const originFileName = e.target.files[0].name;

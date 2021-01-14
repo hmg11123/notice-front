@@ -203,8 +203,8 @@ export const BottomBoard = styled.div`
 `;
 
 export const WriteBtn = styled.div`
- width: ${(props) => props.width || `100%`};
- height: ${(props) => props.height || `100%`};
+ width: ${(props) => props.width || `300px`};
+ height: ${(props) => props.height || `100px`};
  margin: ${(props) => props.margin || ``};
  padding: ${(props) => props.padding || `10px`};
  font-size: ${(props) => props.fs || `16px`};
