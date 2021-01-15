@@ -1,8 +1,8 @@
 # NOTICE PROJECT
 
-- [✅] MM00 : MAIN
-- [✅] MM01 : SIGN UP
-- [✅] MM02 : SIGN IN
+- [x] MM00 : MAIN
+- [x] MM01 : SIGN UP
+- [x] MM02 : SIGN IN
 - [ ] MM03 : POPULAR GALLERY
 - [ ] MM04 : FREE GALLERY
 - [ ] MM05 : GAME BOARD

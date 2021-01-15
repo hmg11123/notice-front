@@ -5,6 +5,7 @@ import MM00 from "../../Routes/MM/MM00";
 import MM01 from "../../Routes/MM/MM01";
 import MM02 from "../../Routes/MM/MM02";
 import MM03 from "../../Routes/MM/MM03";
+import MM04 from "../../Routes/MM/MM04";
 import MM13 from "../../Routes/MM/MM13";
 import Board_D from "../../Routes/Board/Board_D";
 import Board_W from "../../Routes/Board/Board_W";
@@ -21,6 +22,7 @@ const Content = () => {
    <Route exact path="/SignUP" component={MM01}></Route>
    <Route exact path="/SignIN" component={MM02}></Route>
    <Route exact path="/PopularGallery" component={MM03}></Route>
+   <Route exact path="/Gallery" component={MM04}></Route>
    <Route exact path="/MyPage" component={MM13}></Route>
    <Route exact path="/Board_D/:key" component={Board_D}></Route>
    <Route exact path="/Board_W" component={Board_W}></Route>

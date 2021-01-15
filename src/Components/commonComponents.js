@@ -203,8 +203,8 @@ export const BottomBoard = styled.div`
 `;
 
 export const WriteBtn = styled.div`
- width: ${(props) => props.width || `300px`};
- height: ${(props) => props.height || `100px`};
+ width: ${(props) => props.width || `200px`};
+ height: ${(props) => props.height || `60px`};
  margin: ${(props) => props.margin || ``};
  padding: ${(props) => props.padding || `10px`};
  font-size: ${(props) => props.fs || `16px`};
@@ -220,6 +220,27 @@ export const WriteBtn = styled.div`
   background-color: ${(props) => props.theme.whiteColor};
   color: ${(props) => props.theme.pointColor};
   border: 1px solid ${(props) => props.theme.pointColor};
+ }
+`;
+
+export const DeleteBtn = styled.div`
+ width: ${(props) => props.width || `200px`};
+ height: ${(props) => props.height || `60px`};
+ margin: ${(props) => props.margin || ``};
+ padding: ${(props) => props.padding || `10px`};
+ font-size: ${(props) => props.fs || `16px`};
+ font-weight: ${(props) => props.fw || ``};
+ background-color: ${(props) => props.theme.errorColor};
+ color: ${(props) => props.theme.whiteColor};
+ display: flex;
+ align-items: ${(props) => props.al || `center`};
+ justify-content: ${(props) => props.ju || `center`};
+ cursor: pointer;
+ transition: 0.5s;
+ &:hover {
+  background-color: ${(props) => props.theme.whiteColor};
+  color: ${(props) => props.theme.errorColor};
+  border: 1px solid ${(props) => props.theme.errorColor};
  }
 `;
 

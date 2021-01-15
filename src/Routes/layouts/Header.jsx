@@ -145,7 +145,11 @@ const Header = ({ history }) => {
      >
       인기겔러리
      </ActionP>
-     <ActionP padding={`10px`} margin={`10px`}>
+     <ActionP
+      padding={`10px`}
+      margin={`10px`}
+      onClick={() => moveLinkHandler(`Gallery`)}
+     >
       겔러리
      </ActionP>
      <ActionP padding={`10px`} margin={`10px`}>

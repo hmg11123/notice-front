@@ -6,6 +6,7 @@ import {
  BottomBoard,
  WriteBtn,
  TextInput,
+ DeleteBtn,
  TextArea,
 } from "../../../Components/commonComponents";
 import styled from "styled-components";
@@ -41,6 +42,7 @@ const MM13Presenter = ({
  valueMobile,
  _valueChangeHandler,
  userUpdate,
+ userDelete,
 }) => {
  return (
   <Wrapper>
@@ -60,9 +62,14 @@ const MM13Presenter = ({
       전화번호 : {JSON.parse(user[0]).getUser.mobile}
      </Wrapper>
     </Wrapper>
-    <WriteBtn input="button" onClick={_isDialogOpenToggle}>
-     정보 수정
-    </WriteBtn>
+    <Wrapper dr={"row"} ju={`space-around`}>
+     <WriteBtn input="button" onClick={_isDialogOpenToggle}>
+      정보 수정
+     </WriteBtn>
+     <DeleteBtn input="button" onClick={userDelete}>
+      회원 탈퇴
+     </DeleteBtn>
+    </Wrapper>
     <Wrapper dr={`row`}>
      <Wrapper width={`90%`}>
       <TitleBox fs={`25px`} fw={`600`} margin={`30px 0px 10px 0px`}>

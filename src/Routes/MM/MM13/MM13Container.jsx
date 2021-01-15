@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { UPDATE_USER, VIEW_USER } from "./MM13Queries";
+import { UPDATE_USER, VIEW_USER, DELETE_USER } from "./MM13Queries";
 import MM13Presenter from "./MM13Presenter";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import { toast } from "react-toastify";
@@ -31,14 +31,33 @@ const MM13Container = ({ history }) => {
  });
  ////////// USE MUTATION //////////
  const [updateUserMutation] = useMutation(UPDATE_USER);
+ const [deleteUserMutation] = useMutation(DELETE_USER);
  ////////// HANDLER      //////////
  //////// - EVENT HANDLER- ////////
  const moveLinkHandler = (link) => {
   history.push(`/${link}`);
  };
+ const userDelete = async () => {
+  const _id = JSON.parse(user[0]).getUser._id;
+  if (_id === viewUserData.viewUser._id) {
+   const ask = confirm("삭제 하시겠습니다?");
+   if (ask) {
+    const { data } = await deleteUserMutation({
+     variables: {
+      id: _id,
+     },
+    });
+   } else {
+    toast.error("삭제 취소");
+   }
+  } else {
+   toast.error("삭제 실패");
+  }
+ };
+
  const userUpdate = async () => {
   const _id = JSON.parse(user[0]).getUser._id;
-  if (JSON.parse(user[0]).getUser._id === viewUserData.viewUser._id) {
+  if (_id === viewUserData.viewUser._id) {
    const { data } = await updateUserMutation({
     variables: {
      id: _id,
@@ -88,6 +107,7 @@ const MM13Container = ({ history }) => {
    valueName={value.name}
    valueNickName={value.nickName}
    valueMobile={value.mobile}
+   userDelete={userDelete}
    userUpdate={userUpdate}
    _isDialogOpenToggle={_isDialogOpenToggle}
    isDialogOpen={isDialogOpen}
