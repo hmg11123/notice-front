@@ -10,7 +10,7 @@ import {
  FileBtn,
  OriginFileBtn,
  ImgBox,
-} from "../../../Components/commonComponents";
+} from "../../../../Components/commonComponents";
 const WriteBox = styled.div`
  width: 1000px;
  height: 700px;
@@ -26,7 +26,7 @@ const TextBox = styled.div`
  margin-bottom: 10px;
  font-size: 16px;
 `;
-const Board_WPresenter = ({
+const Game_WPresenter = ({
  imagePath,
  fileChangeHandler,
  user,
@@ -90,4 +90,4 @@ const Board_WPresenter = ({
  );
 };
 
-export default Board_WPresenter;
+export default Game_WPresenter;

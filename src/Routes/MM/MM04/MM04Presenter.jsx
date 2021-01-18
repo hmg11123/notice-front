@@ -69,7 +69,7 @@ const MM04Presenter = ({
         return (
          <BottomBoard
           key={idx}
-          onClick={() => moveLinkHandler(`Board_D/${data._id}`)}
+          onClick={() => moveLinkHandler(`Gallery_D/${data._id}`)}
          >
           <Wrapper width={`5%`} padding={`5px`}>
            {/** 번호 */}
@@ -94,7 +94,7 @@ const MM04Presenter = ({
            {data.hit}
           </Wrapper>
           <Wrapper width={`10%`} padding={`5px`}>
-           추천수
+           {data.recommendation}
           </Wrapper>
          </BottomBoard>
         );

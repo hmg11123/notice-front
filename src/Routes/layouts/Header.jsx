@@ -152,29 +152,28 @@ const Header = ({ history }) => {
      >
       겔러리
      </ActionP>
-     <ActionP padding={`10px`} margin={`10px`}>
+     <ActionP
+      padding={`10px`}
+      margin={`10px`}
+      onClick={() => moveLinkHandler(`GameBoard`)}
+     >
       게임
      </ActionP>
-     <ActionP padding={`10px`} margin={`10px`}>
+     <ActionP
+      padding={`10px`}
+      margin={`10px`}
+      onClick={() => moveLinkHandler(`MovieBoard`)}
+     >
       영화
      </ActionP>
      <ActionP padding={`10px`} margin={`10px`}>
       스포츠
      </ActionP>
      <ActionP padding={`10px`} margin={`10px`}>
-      취미
-     </ActionP>
-     <ActionP padding={`10px`} margin={`10px`}>
-      뉴스
-     </ActionP>
-     <ActionP padding={`10px`} margin={`10px`}>
       가입인사
      </ActionP>
      <ActionP padding={`10px`} margin={`10px`}>
       공지사항
-     </ActionP>
-     <ActionP padding={`10px`} margin={`10px`}>
-      QnA
      </ActionP>
     </Wrapper>
    </Wrapper>

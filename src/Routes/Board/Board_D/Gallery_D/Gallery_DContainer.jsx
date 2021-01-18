@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
-import BoardPresenter from "./BoardPresenter";
+import Gallery_DPresenter from "./Gallery_DPresenter";
 import {
- GET_POPULAR_GALLERY,
- DELETE_POPULAR_GALLERY,
- UPDATE_POPULAR_GALLERY,
-} from "./BoardQueries";
+ GET_GALLERY,
+ DELETE_GALLERY,
+ UPDATE_GALLERY,
+ RECOMMENDATION_UP,
+} from "./Gallery_DQueries";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import { toast } from "react-toastify";
-import useInput from "../../../Hooks/useInput";
-import storageRef from "../../../firebase";
+import useInput from "../../../../Hooks/useInput";
+import storageRef from "../../../../firebase";
 
-const BoardContainer = ({ match, history }) => {
+const Gallery_DContainer = ({ match, history }) => {
  ////////////// - USE CONTEXT- ///////////////
 
  ////////////// - USE STATE- ///////////////
@@ -20,6 +21,8 @@ const BoardContainer = ({ match, history }) => {
   title: "",
   desc: "",
  });
+ const user = useState(window.sessionStorage.getItem(`login`));
+
  const [imagePath, setImagePath] = useState(``);
  const userkey = match.params.key;
  const [currentData, setCurrentData] = useState(null);
@@ -28,10 +31,10 @@ const BoardContainer = ({ match, history }) => {
  console.log(userkey);
  ///////////// - USE QUERY- ////////////////
  const {
-  data: popularGalleryData,
-  loading: popularGalleryLoding,
-  refetch: popularGalleryRefetch,
- } = useQuery(GET_POPULAR_GALLERY, {
+  data: galleryData,
+  loading: galleryLoding,
+  refetch: galleryRefetch,
+ } = useQuery(GET_GALLERY, {
   variables: {
    id: userkey,
   },
@@ -39,13 +42,14 @@ const BoardContainer = ({ match, history }) => {
 
  ///////////// - USE MUTATION- /////////////
 
- const [deletePopularGalleryMutation] = useMutation(DELETE_POPULAR_GALLERY, {
+ const [deleteGalleryMutation] = useMutation(DELETE_GALLERY, {
   variables: {
    id: userkey,
   },
  });
 
- const [updatePopularGalleryMutation] = useMutation(UPDATE_POPULAR_GALLERY);
+ const [updateGalleryMutation] = useMutation(UPDATE_GALLERY);
+ const [recommendationUpMutation] = useMutation(RECOMMENDATION_UP);
 
  ///////////// - EVENT HANDLER- ////////////
  const _valueChangeHandler = (event) => {
@@ -72,13 +76,10 @@ const BoardContainer = ({ match, history }) => {
 
  const deleteHandler = async () => {
   const key = sessionStorage.getItem(`login`);
-  if (
-   JSON.parse(key).getUser.nickName ===
-   popularGalleryData.getPopularGallery.author
-  ) {
-   const { data } = await deletePopularGalleryMutation();
-   if (data.deletePopularGallery) {
-    moveLinkHandler("PopularGallery");
+  if (JSON.parse(key).getUser.nickName === galleryData.getGallery.author) {
+   const { data } = await deleteGalleryMutation();
+   if (data.deletegallery) {
+    moveLinkHandler("gallery");
     toast.info(`게시글이 성공적으로 삭제되었습니다`);
    }
    console.log(data);
@@ -89,19 +90,16 @@ const BoardContainer = ({ match, history }) => {
 
  const updateHandler = async () => {
   const key = sessionStorage.getItem(`login`);
-  if (
-   JSON.parse(key).getUser.nickName ===
-   popularGalleryData.getPopularGallery.author
-  ) {
-   const { data } = await updatePopularGalleryMutation({
+  if (JSON.parse(key).getUser.nickName === galleryData.getGallery.author) {
+   const { data } = await updateGalleryMutation({
     variables: {
-     id: popularGalleryData && popularGalleryData.getPopularGallery._id,
+     id: galleryData && galleryData.getGallery._id,
      title: value.title,
      description: value.desc,
      imgPath: imagePath,
     },
    });
-   if (data.updatePopularGallery) {
+   if (data.updategallery) {
     toast.info("게시글이 수정되었습니다");
    } else {
     toast.error("다시 시도해주세요");
@@ -110,6 +108,23 @@ const BoardContainer = ({ match, history }) => {
   } else {
    moveLinkHandler("SignIN");
    toast.error("로그인 후 이용해주세요");
+  }
+ };
+
+ const recommendationUpHandler = async () => {
+  console.log(galleryData.getGallery.recomUser.length);
+  console.log(JSON.parse(user[0]).getUser._id);
+  if (galleryData.getGallery.recomUser !== JSON.parse(user[0]).getUser._id) {
+   const { data } = await recommendationUpMutation({
+    variables: {
+     id: userkey,
+     recommendation: galleryData.getGallery.recomUser.length,
+     recomUser: JSON.parse(user[0]).getUser._id,
+    },
+   });
+   toast.info("추천하셨습니다.");
+  } else {
+   toast.error("이미 추천하셧습니다");
   }
  };
 
@@ -148,20 +163,18 @@ const BoardContainer = ({ match, history }) => {
 
  ///////////// - USE EFFECT- ///////////////
  useEffect(() => {
-  if (popularGalleryData && popularGalleryData.getPopularGallery) {
-   let tempData = popularGalleryData.getPopularGallery;
+  if (galleryData && galleryData.getGallery) {
+   let tempData = galleryData.getGallery;
 
    //    const desc = document.getElementById("notice_description-js");
 
    setCurrentData(tempData);
    setImagePath(tempData.imgPath);
   }
- }, [popularGalleryData]);
+ }, [galleryData]);
  return (
-  <BoardPresenter
-   popularGalleryData={
-    popularGalleryData && popularGalleryData.getPopularGallery
-   }
+  <Gallery_DPresenter
+   galleryData={galleryData && galleryData.getGallery}
    imagePath={imagePath}
    _valueChangeHandler={_valueChangeHandler}
    updateHandler={updateHandler}
@@ -170,9 +183,10 @@ const BoardContainer = ({ match, history }) => {
    isDialogOpen={isDialogOpen}
    valueTitle={value.title}
    valueDesc={value.desc}
+   recommendationUpHandler={recommendationUpHandler}
    fileChangeHandler={fileChangeHandler}
-  ></BoardPresenter>
+  ></Gallery_DPresenter>
  );
 };
 
-export default BoardContainer;
+export default Gallery_DContainer;

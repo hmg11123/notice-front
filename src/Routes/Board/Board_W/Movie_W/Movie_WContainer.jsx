@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import Board_WPresenter from "./Board_WPresenter";
-import storageRef from "../../../firebase";
-import useInput from "../../../Hooks/useInput";
+import Movie_WPresenter from "./Movie_WPresenter";
+import storageRef from "../../../../firebase";
+import useInput from "../../../../Hooks/useInput";
 import { useQuery, useMutation } from "react-apollo-hooks";
-import { CREATE_POPULAR_GALLERY } from "./Board_WQueries";
+import { CREATE_MOVIE_Board } from "./Movie_WQueries";
 import { toast } from "react-toastify";
 
-const Board_WContaniner = ({ history }) => {
+const Movie_WContainer = ({ history }) => {
  ////////////// - USE CONTEXT- ///////////////
 
  ////////////// - USE STATE- ///////////////
@@ -27,7 +27,7 @@ const Board_WContaniner = ({ history }) => {
  ///////////// - USE QUERY- ////////////////
 
  ///////////// - USE MUTATION- /////////////
- const [popularGalleryMutation] = useMutation(CREATE_POPULAR_GALLERY);
+ const [MovieMutation] = useMutation(CREATE_MOVIE_Board);
 
  ///////////// - EVENT HANDLER- ////////////
  const moveLinkHandler = (link) => {
@@ -42,7 +42,7 @@ const Board_WContaniner = ({ history }) => {
   if (!imagePath) {
    setImagePath(`-`);
   }
-  const { data } = await popularGalleryMutation({
+  const { data } = await MovieMutation({
    variables: {
     title: inputTitle.value,
     author: nickName,
@@ -50,11 +50,11 @@ const Board_WContaniner = ({ history }) => {
     imgPath: imagePath,
    },
   });
-  if (data.createPopularGallery) {
+  if (data.createMovieBoard) {
    toast.info("게시글이 추가되었습니다");
    setImagePath(``);
    setNickName(``);
-   moveLinkHandler(`PopularGallery`);
+   moveLinkHandler(`MovieBoard`);
    console.log(`추가됨`);
   } else {
    toast.error("다시 시도해주세요");
@@ -98,7 +98,7 @@ const Board_WContaniner = ({ history }) => {
  ///////////// - USE EFFECT- ///////////////
 
  return (
-  <Board_WPresenter
+  <Movie_WPresenter
    inputTitle={inputTitle}
    imagePath={imagePath}
    user={user}
@@ -107,8 +107,8 @@ const Board_WContaniner = ({ history }) => {
    inputDescription={inputDescription}
    fileChangeHandler={fileChangeHandler}
    cancelHandler={cancelHandler}
-  ></Board_WPresenter>
+  ></Movie_WPresenter>
  );
 };
 
-export default Board_WContaniner;
+export default Movie_WContainer;

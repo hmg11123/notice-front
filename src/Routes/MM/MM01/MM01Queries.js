@@ -2,6 +2,7 @@ import { gql } from "apollo-boost";
 
 export const CREATE_USER = gql`
  mutation createUser(
+  $type: String!
   $email: String!
   $nickName: String!
   $name: String!
@@ -10,6 +11,7 @@ export const CREATE_USER = gql`
   $deletedAt: String!
  ) {
   createUser(
+   type: $type
    email: $email
    nickName: $nickName
    name: $name
@@ -17,5 +19,19 @@ export const CREATE_USER = gql`
    isDelete: $isDelete
    deletedAt: $deletedAt
   )
+ }
+`;
+
+export const GET_ALL_USER = gql`
+ mutation getAllUser {
+  getAllUser {
+   email
+  }
+ }
+`;
+
+export const USER_LENGTH = gql`
+ query userLength {
+  userLength
  }
 `;

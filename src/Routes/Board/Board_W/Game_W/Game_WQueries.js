@@ -1,13 +1,13 @@
 import { gql } from "apollo-boost";
 
-export const CREATE_POPULAR_GALLERY = gql`
- mutation createPopularGallery(
+export const CREATE_GAME_BOARD = gql`
+ mutation createGameBoard(
   $title: String!
   $author: String!
   $description: String!
   $imgPath: String
  ) {
-  createPopularGallery(
+  createGameBoard(
    title: $title
    author: $author
    description: $description

@@ -13,6 +13,7 @@ export const GET_ALL_GALLERY = gql`
    createdAt
    isDelete
    author
+   recommendation
    deletedAt
    hit
    imgPath
