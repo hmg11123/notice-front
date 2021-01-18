@@ -166,8 +166,15 @@ const Header = ({ history }) => {
      >
       영화
      </ActionP>
-     <ActionP padding={`10px`} margin={`10px`}>
+     <ActionP
+      padding={`10px`}
+      margin={`10px`}
+      onClick={() => moveLinkHandler(`SoprtsBoard`)}
+     >
       스포츠
+     </ActionP>
+     <ActionP padding={`10px`} margin={`10px`}>
+      사진첩
      </ActionP>
      <ActionP padding={`10px`} margin={`10px`}>
       가입인사

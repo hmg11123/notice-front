@@ -63,7 +63,7 @@ const MM04Presenter = ({
      {/**Bottom */}
      {galleryBannerDatum ? (
       galleryBannerDatum.length === 0 ? (
-       <Wrapper>인기겔러리가 없습니다.</Wrapper>
+       <Wrapper>겔러리가 없습니다.</Wrapper>
       ) : (
        galleryBannerDatum.map((data, idx) => {
         return (
