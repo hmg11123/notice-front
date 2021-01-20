@@ -5,6 +5,7 @@ import {
  GET_ALL_GALLERY,
  GET_GALLERY_TOTAL_PAGE,
  GET_ALL_GALLERY_LENGTH,
+ GALLERY_HIT_UP,
 } from "./MM04Queries";
 import { toast } from "react-toastify";
 
@@ -14,8 +15,7 @@ const MM04Container = ({ history }) => {
  const [searchValue, setSearchValue] = useState("");
  const [pages, setPages] = useState(null);
  const [currentPage, setCurrentPage] = useState(0);
- const [limit, setLimit] = useState(15);
- const [recommendation, setrecommendation] = useState(0);
+ const [limit, setLimit] = useState(35);
  ////////// USE REF      //////////
  ////////// USE CONTEXT  //////////
  ////////// USE QUERY    //////////
@@ -50,6 +50,7 @@ const MM04Container = ({ history }) => {
   }
  );
  ////////// USE MUTATION //////////
+ const [galleryHitUpMutaion] = useMutation(GALLERY_HIT_UP);
  ////////// USE EFFECT   //////////
  useEffect(() => {
   // noticeDatumRefetch();
@@ -57,13 +58,14 @@ const MM04Container = ({ history }) => {
   if (galleryTotalPage && !pages) {
    const temp = [];
 
-   for (let i = 0; i < galleryTotalPage.getgalleryTotalPage; i++) {
+   for (let i = 0; i < galleryTotalPage.getGalleryTotalPage; i++) {
     temp.push(i);
    }
    setPages(temp);
   }
  }, [galleryTotalPage]);
  useEffect(() => {
+  galleryAllRefetch();
   galleryBannerRefetch();
  }, []);
 
@@ -74,7 +76,7 @@ const MM04Container = ({ history }) => {
   if (galleryTotalPage && !pages) {
    const temp = [];
 
-   for (let i = 0; i < galleryTotalPage.getgalleryTotalPage; i++) {
+   for (let i = 0; i < galleryTotalPage.getGalleryTotalPage; i++) {
     temp.push(i);
    }
    setPages(temp);
@@ -101,15 +103,17 @@ const MM04Container = ({ history }) => {
    return;
   }
 
-  if (page > galleryTotalPage.getgalleryTotalPage - 1) {
+  if (page > galleryTotalPage.getGalleryTotalPage - 1) {
    toast.error("마지막 페이지 입니다.");
    return;
   }
 
   setCurrentPage(page);
  };
- const moveLinkHandler = (idx) => {
-  history.push(`/${idx}`);
+ const moveLinkHandler = async (idx) => {
+  const { data } = await galleryHitUpMutaion({
+   variables: { id: idx },
+  }).then(history.push(`/${idx}`));
  };
  return (
   <MM04Presenter

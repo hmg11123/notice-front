@@ -18,13 +18,13 @@ export const GET_MOVIE_BOARD = gql`
  }
 `;
 export const UPDATE_MOVIE = gql`
- mutation updateMovie(
+ mutation updateMovieBaord(
   $id: String!
   $title: String!
   $description: String!
   $imgPath: String!
  ) {
-  updateMovie(
+  updateMovieBaord(
    id: $id
    title: $title
    description: $description
@@ -34,8 +34,8 @@ export const UPDATE_MOVIE = gql`
 `;
 
 export const DELETE_MOVIE = gql`
- mutation deleteMovie($id: String!) {
-  deleteMovie(id: $id)
+ mutation deleteMovieBaord($id: String!) {
+  deleteMovieBaord(id: $id)
  }
 `;
 

@@ -173,13 +173,32 @@ const Header = ({ history }) => {
      >
       스포츠
      </ActionP>
-     <ActionP padding={`10px`} margin={`10px`}>
+     <ActionP
+      padding={`10px`}
+      margin={`10px`}
+      onClick={() => moveLinkHandler(`PhotoBoard`)}
+     >
       사진첩
      </ActionP>
-     <ActionP padding={`10px`} margin={`10px`}>
+     <ActionP
+      padding={`10px`}
+      margin={`10px`}
+      onClick={() => moveLinkHandler(`HobbyBoard`)}
+     >
+      취미
+     </ActionP>
+     <ActionP
+      padding={`10px`}
+      margin={`10px`}
+      onClick={() => moveLinkHandler(`JoinBoard`)}
+     >
       가입인사
      </ActionP>
-     <ActionP padding={`10px`} margin={`10px`}>
+     <ActionP
+      padding={`10px`}
+      margin={`10px`}
+      onClick={() => moveLinkHandler(`NoticeBoard`)}
+     >
       공지사항
      </ActionP>
     </Wrapper>

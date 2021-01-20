@@ -308,3 +308,25 @@ export const FileBtn = styled.label`
   border: 1px solid ${(props) => props.theme.pointColor};
  }
 `;
+
+export const GoodBtn = styled.div`
+ width: ${(props) => props.width || `100px`};
+ height: ${(props) => props.height || `100%`};
+ margin: ${(props) => props.margin || ``};
+ padding: ${(props) => props.padding || `10px`};
+ font-size: ${(props) => props.fs || `16px`};
+ font-weight: ${(props) => props.fw || ``};
+ border: 1px solid ${(props) => props.theme.pointColor};
+ border-radius: ${(props) => props.theme.radius};
+ color: ${(props) => props.color || ``};
+ display: flex;
+ flex-direction: ${(props) => props.dr || `column`};
+ align-items: ${(props) => props.al || `center`};
+ justify-content: ${(props) => props.ju || `center`};
+ flex-wrap: ${(props) => props.wr || ``};
+`;
+
+export const GoodImg = styled.img`
+ width: "50px";
+ height: "50px";
+`;

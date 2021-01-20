@@ -70,62 +70,6 @@ const MM13Presenter = ({
       회원 탈퇴
      </DeleteBtn>
     </Wrapper>
-    <Wrapper dr={`row`}>
-     <Wrapper width={`90%`}>
-      <TitleBox fs={`25px`} fw={`600`} margin={`30px 0px 10px 0px`}>
-       내 게시글
-      </TitleBox>
-      <Wrapper>
-       {/**Top */}
-       <TopBoard>
-        <Wrapper width={`5%`} padding={`5px`}>
-         번호
-        </Wrapper>
-        <Wrapper width={`50%`} padding={`5px`}>
-         제목
-        </Wrapper>
-        <Wrapper width={`10%`} padding={`5px`}>
-         글쓴이
-        </Wrapper>
-        <Wrapper width={`10%`} padding={`5px`}>
-         작성일
-        </Wrapper>
-        <Wrapper width={`10%`} padding={`5px`}>
-         조회수
-        </Wrapper>
-        <Wrapper width={`10%`} padding={`5px`}>
-         추천
-        </Wrapper>
-       </TopBoard>
-       {/**Bottom */}
-       <BottomBoard>
-        <Wrapper width={`5%`} padding={`5px`}>
-         번호
-        </Wrapper>
-        <Wrapper
-         width={`50%`}
-         padding={`5px`}
-         al={`flex-start`}
-         margin={`0px 0px 0px 55px`}
-        >
-         제목
-        </Wrapper>
-        <Wrapper width={`10%`} padding={`5px`}>
-         글쓴이
-        </Wrapper>
-        <Wrapper width={`10%`} padding={`5px`}>
-         작성일
-        </Wrapper>
-        <Wrapper width={`10%`} padding={`5px`}>
-         조회수
-        </Wrapper>
-        <Wrapper width={`10%`} padding={`5px`}>
-         추천
-        </Wrapper>
-       </BottomBoard>
-      </Wrapper>
-     </Wrapper>
-    </Wrapper>
    </MyPageWrapper>
    {/* Dialog Area */}
    {/**====================================================================== */}

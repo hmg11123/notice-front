@@ -70,7 +70,7 @@ const Movie_WPresenter = ({
       placeholder={`글을 작성해주세요.`}
       {...inputDescription}
      ></TextArea>
-     {/* <ImgBox width={`2  00px`} height={`200px`}/> */}
+     <ImgBox width={`300px`} height={`300px`} src={imagePath} />
     </Wrapper>
     <Wrapper height={`15%`} dr={`row`} ju={`flex-end`}>
      <CheckBtn

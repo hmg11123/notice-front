@@ -9,12 +9,38 @@ export const GET_ALL_NOTICE = gql`
   ) {
    _id
    type
+   detailType
    title
    description
    #    author
    createdAt
    isDelete
    deletedAt
+  }
+ }
+`;
+
+export const GET_ALL_RECOM_POP_GALL = gql`
+ query getAllRecomPopGall(
+  $searchValue: String!
+  $limit: Int!
+  $currentPage: Int!
+ ) {
+  getAllRecomPopGall(
+   searchValue: $searchValue
+   limit: $limit
+   currentPage: $currentPage
+  ) {
+   _id
+   title
+   description
+   createdAt
+   isDelete
+   author
+   recommendation
+   deletedAt
+   hit
+   imgPath
   }
  }
 `;

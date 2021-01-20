@@ -40,23 +40,23 @@ const MM05Presenter = ({
        번호
       </Wrapper>
       <Wrapper
-       width={`50%`}
+       width={`42%`}
        padding={`5px`}
        al={`flex-start`}
        margin={`0px 0px 0px 55px`}
       >
        제목
       </Wrapper>
-      <Wrapper width={`10%`} padding={`5px`}>
+      <Wrapper width={`12%`} padding={`5px`}>
        글쓴이
       </Wrapper>
-      <Wrapper width={`10%`} padding={`5px`}>
+      <Wrapper width={`12%`} padding={`5px`}>
        작성일
       </Wrapper>
-      <Wrapper width={`10%`} padding={`5px`}>
+      <Wrapper width={`12%`} padding={`5px`}>
        조회수
       </Wrapper>
-      <Wrapper width={`10%`} padding={`5px`}>
+      <Wrapper width={`12%`} padding={`5px`}>
        추천
       </Wrapper>
      </TopBoard>
@@ -77,24 +77,24 @@ const MM05Presenter = ({
            {/** 번호 */}
           </Wrapper>
           <Wrapper
-           width={`50%`}
+           width={`42%`}
            padding={`5px`}
            al={`flex-start`}
            margin={`0px 0px 0px 55px`}
           >
            {data.title}
           </Wrapper>
-          <Wrapper width={`10%`} padding={`5px`}>
+          <Wrapper width={`12%`} padding={`5px`}>
            {data.author}
           </Wrapper>
-          <Wrapper width={`10%`} padding={`5px`}>
+          <Wrapper width={`12%`} padding={`5px`}>
            {data.createdAt.substring(0, 10)}
           </Wrapper>
-          <Wrapper width={`10%`} padding={`5px`}>
+          <Wrapper width={`12%`} padding={`5px`}>
            {data.hit}
           </Wrapper>
-          <Wrapper width={`10%`} padding={`5px`}>
-           {data.recommendation}
+          <Wrapper width={`12%`} padding={`5px`}>
+           {data.recommendation + 1}
           </Wrapper>
          </BottomBoard>
         );

@@ -78,7 +78,7 @@ const Gallery_DContainer = ({ match, history }) => {
   const key = sessionStorage.getItem(`login`);
   if (JSON.parse(key).getUser.nickName === galleryData.getGallery.author) {
    const { data } = await deleteGalleryMutation();
-   if (data.deletegallery) {
+   if (data) {
     moveLinkHandler("gallery");
     toast.info(`게시글이 성공적으로 삭제되었습니다`);
    }
@@ -99,12 +99,14 @@ const Gallery_DContainer = ({ match, history }) => {
      imgPath: imagePath,
     },
    });
-   if (data.updategallery) {
+   console.log(data);
+   if (data) {
     toast.info("게시글이 수정되었습니다");
+    galleryRefetch();
+    setIsDialogOpen(false);
    } else {
     toast.error("다시 시도해주세요");
    }
-   moveLinkHandler(`Board_D/${userkey}`);
   } else {
    moveLinkHandler("SignIN");
    toast.error("로그인 후 이용해주세요");

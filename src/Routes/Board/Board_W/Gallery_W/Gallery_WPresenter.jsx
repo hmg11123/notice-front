@@ -13,7 +13,7 @@ import {
 } from "../../../../Components/commonComponents";
 const WriteBox = styled.div`
  width: 1000px;
- height: 700px;
+ height: 1000px;
  border: 1.5px solid ${(props) => props.theme.subThemeColor};
  display: flex;
  flex-direction: ${(props) => props.dr || `column`};
@@ -39,7 +39,7 @@ const Gallery_WPresenter = ({
  return (
   <Wrapper margin={`0px 0px 100px 0px`}>
    <Wrapper margin={`30px 0px`}>
-    <TitleBox>추후 데이터 나올예정 타이틀임</TitleBox>
+    <TitleBox>겔러리</TitleBox>
    </Wrapper>
    <WriteBox>
     <Wrapper height={`85%`}>
@@ -66,11 +66,10 @@ const Gallery_WPresenter = ({
      <TextArea
       width={`80%`}
       height={`70%`}
-      //   src={imagePath}
       placeholder={`글을 작성해주세요.`}
       {...inputDescription}
      ></TextArea>
-     {/* <ImgBox width={`2  00px`} height={`200px`}/> */}
+     <ImgBox width={`300px`} height={`300px`} src={imagePath} />
     </Wrapper>
     <Wrapper height={`15%`} dr={`row`} ju={`flex-end`}>
      <CheckBtn

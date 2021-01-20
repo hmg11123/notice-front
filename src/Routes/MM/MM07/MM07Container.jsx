@@ -64,7 +64,8 @@ const MM07Container = ({ history }) => {
   }
  }, [soprtsTotalPage]);
  useEffect(() => {
-  soprtsBannerRefetch();
+  gameAllRefetch();
+  gameBannerRefetch();
  }, []);
 
  useEffect(() => {
@@ -89,7 +90,7 @@ const MM07Container = ({ history }) => {
  const writeMoveLinkHandler = () => {
   const key = sessionStorage.getItem(`login`);
   if (key) {
-   moveLinkHandler(`soprts_W`);
+   moveLinkHandler(`Soprts_W`);
   } else {
    toast.info("로그인을 하고 이용하실수 있습니다");
   }

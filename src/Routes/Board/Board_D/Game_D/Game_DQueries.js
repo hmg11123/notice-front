@@ -9,20 +9,22 @@ export const GET_GAME_BOARD = gql`
    createdAt
    isDelete
    deletedAt
+   recommendation
    author
+   recomUser
    hit
    imgPath
   }
  }
 `;
 export const UPDATE_GAME = gql`
- mutation updateGame(
+ mutation updateGameBoard(
   $id: String!
   $title: String!
   $description: String!
   $imgPath: String!
  ) {
-  updateGame(
+  updateGameBoard(
    id: $id
    title: $title
    description: $description
@@ -34,5 +36,15 @@ export const UPDATE_GAME = gql`
 export const DELETE_GAME = gql`
  mutation deleteGame($id: String!) {
   deleteGame(id: $id)
+ }
+`;
+
+export const RECOMMENDATION_UP = gql`
+ mutation gameRecomUp(
+  $id: String!
+  $recomUser: String!
+  $recommendation: Int!
+ ) {
+  gameRecomUp(id: $id, recomUser: $recomUser, recommendation: $recommendation)
  }
 `;

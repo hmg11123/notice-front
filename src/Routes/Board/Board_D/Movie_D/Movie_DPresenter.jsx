@@ -113,7 +113,11 @@ const Movie_DPresenter = ({
         {movieData ? movieData.author : <CircularIndeterminate />}
        </Wrapper>
        <Wrapper width={`15%`}>
-        {movieData ? movieData.createdAt : <CircularIndeterminate />}
+        {movieData ? (
+         movieData.createdAt.substring(0, 10)
+        ) : (
+         <CircularIndeterminate />
+        )}
        </Wrapper>
        <Wrapper width={`45%`}></Wrapper>
        <Wrapper width={`10%`}>추천수</Wrapper>

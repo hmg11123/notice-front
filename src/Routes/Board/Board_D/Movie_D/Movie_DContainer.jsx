@@ -78,8 +78,8 @@ const Movie_DContainer = ({ match, history }) => {
   const key = sessionStorage.getItem(`login`);
   if (JSON.parse(key).getUser.nickName === movieData.getMovieBoard.author) {
    const { data } = await deleteMovieMutation();
-   if (data.deleteMovie) {
-    moveLinkHandler("Movie");
+   if (data) {
+    moveLinkHandler("MovieBoard");
     toast.info(`게시글이 성공적으로 삭제되었습니다`);
    }
    console.log(data);
@@ -99,12 +99,13 @@ const Movie_DContainer = ({ match, history }) => {
      imgPath: imagePath,
     },
    });
-   if (data.updateMovie) {
+   if (data) {
     toast.info("게시글이 수정되었습니다");
+    MovieRefetch();
+    setIsDialogOpen(false);
    } else {
     toast.error("다시 시도해주세요");
    }
-   moveLinkHandler(`Board_D/${userkey}`);
   } else {
    moveLinkHandler("SignIN");
    toast.error("로그인 후 이용해주세요");

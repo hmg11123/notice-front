@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 import MM02Presenter from "./MM02Presenter";
 import useInput from "../../../Hooks/useInput";
-import { TRY_LOGIN, CHECK_CODE, GET_USER } from "./MM02Queries";
+import {
+ TRY_LOGIN,
+ CHECK_CODE,
+ GET_USER,
+ GET_ALL_USER,
+ USER_LENGTH,
+} from "./MM02Queries";
 import { useQuery, useMutation } from "react-apollo-hooks";
+import { toast } from "react-toastify";
 
 const MM02Container = ({ history }) => {
  ////////// VARIABLE     //////////
@@ -33,17 +40,27 @@ const MM02Container = ({ history }) => {
  //    email: inputEmail.value,
  //   },
  //  });
+ const { data: userlengthData, refetch: userlengthRefetch } = useQuery(
+  USER_LENGTH
+ );
 
  ////////// USE MUTATION //////////
  const [tryLoginMutation] = useMutation(TRY_LOGIN);
  const [secretCodeMutation] = useMutation(CHECK_CODE);
  const [getUserMutation] = useMutation(GET_USER);
+ const [getAllUserMutation] = useMutation(GET_ALL_USER);
 
  ////////// HANDLER      //////////
 
  const moveLinkHandler = (link) => {
   history.push(`/${link}`);
  };
+
+ const allUserData = async () => {
+  const { data } = await getAllUserMutation();
+  return { data };
+ };
+
  const loginClickHandler = async () => {
   if (!inputEmail.value || inputEmail.value.trim() === "") {
    alert("이메일은 필수 입력사항 입니다.");

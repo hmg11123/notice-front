@@ -27,3 +27,23 @@ export const GET_USER = gql`
   }
  }
 `;
+
+export const GET_ALL_USER = gql`
+ mutation getAllUser {
+  getAllUser {
+   _id
+   email
+   nickName
+   name
+   mobile
+   isDelete
+   deletedAt
+  }
+ }
+`;
+
+export const USER_LENGTH = gql`
+ query userLength {
+  userLength
+ }
+`;

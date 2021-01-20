@@ -10,6 +10,8 @@ import {
  TextArea,
  FileBtn,
  OriginFileBtn,
+ GoodBtn,
+ GoodImg,
 } from "../../../../Components/commonComponents";
 import CircularIndeterminate from "../../../../Components/loading/CircularIndeterminate";
 import styled from "styled-components";
@@ -56,30 +58,8 @@ const UpdateBtn = styled.input`
  }
 `;
 
-const GoodImg = styled.img`
- width: "50px";
- height: "50px";
-`;
-
 const OverFlowDiv = styled.div`
  overflow-y: auto;
-`;
-
-const GoodBtn = styled.div`
- width: ${(props) => props.width || `100px`};
- height: ${(props) => props.height || `100%`};
- margin: ${(props) => props.margin || ``};
- padding: ${(props) => props.padding || `10px`};
- font-size: ${(props) => props.fs || `16px`};
- font-weight: ${(props) => props.fw || ``};
- border: 1px solid ${(props) => props.theme.pointColor};
- border-radius: ${(props) => props.theme.radius};
- color: ${(props) => props.color || ``};
- display: flex;
- flex-direction: ${(props) => props.dr || `column`};
- align-items: ${(props) => props.al || `center`};
- justify-content: ${(props) => props.ju || `center`};
- flex-wrap: ${(props) => props.wr || ``};
 `;
 
 const Gallery_DPresenter = ({
@@ -113,14 +93,20 @@ const Gallery_DPresenter = ({
         {galleryData ? galleryData.author : <CircularIndeterminate />}
        </Wrapper>
        <Wrapper width={`15%`}>
-        {galleryData ? galleryData.createdAt : <CircularIndeterminate />}
+        {galleryData ? (
+         galleryData.createdAt.substring(0, 10)
+        ) : (
+         <CircularIndeterminate />
+        )}
        </Wrapper>
        <Wrapper width={`45%`}></Wrapper>
-       <Wrapper width={`10%`}>추천수</Wrapper>
-       <Wrapper width={`10%`}>
+       <Wrapper width={`15%`}>
+        추천수 :
+        {galleryData ? galleryData.recommendation : <CircularIndeterminate />}
+       </Wrapper>
+       <Wrapper width={`15%`}>
         조회수 :{galleryData ? galleryData.hit : <CircularIndeterminate />}
        </Wrapper>
-       <Wrapper width={`10%`}>댓글</Wrapper>
       </TopBoard>
       <Wrapper al={`flex-start`} ju={`flex-start`} margin={`30px`}>
        {galleryData ? (

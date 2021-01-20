@@ -20,7 +20,10 @@ const MM03Presenter = ({
  currentPage,
  setCurrentPage,
  moveLinkHandler,
+ totalCnt,
+ changePageHandler,
  pages,
+ prevAndNextPageChangeNoticeHandler,
 }) => {
  return (
   <Wrapper dr={`row`}>
@@ -36,23 +39,23 @@ const MM03Presenter = ({
        번호
       </Wrapper>
       <Wrapper
-       width={`50%`}
+       width={`42%`}
        padding={`5px`}
        al={`flex-start`}
        margin={`0px 0px 0px 55px`}
       >
        제목
       </Wrapper>
-      <Wrapper width={`10%`} padding={`5px`}>
+      <Wrapper width={`12%`} padding={`5px`}>
        글쓴이
       </Wrapper>
-      <Wrapper width={`10%`} padding={`5px`}>
+      <Wrapper width={`12%`} padding={`5px`}>
        작성일
       </Wrapper>
-      <Wrapper width={`10%`} padding={`5px`}>
+      <Wrapper width={`12%`} padding={`5px`}>
        조회수
       </Wrapper>
-      <Wrapper width={`10%`} padding={`5px`}>
+      <Wrapper width={`12%`} padding={`5px`}>
        추천수
       </Wrapper>
      </TopBoard>
@@ -63,34 +66,30 @@ const MM03Presenter = ({
       ) : (
        recomPopGallBannerDatum.map((data, idx) => {
         return (
-         <BottomBoard
-          key={idx}
-          onClick={() => moveLinkHandler(`Gallery_D/${data._id}`)}
-         >
+         <BottomBoard key={idx} onClick={() => moveLinkHandler(`${data._id}`)}>
           <Wrapper width={`5%`} padding={`5px`}>
            {/** 번호 */}
-           {/* {totalCnt - (currentPage * limit + idx) + ""} */}
-           번호
+           {totalCnt - (currentPage * limit + idx) + ""}
            {/** 번호 */}
           </Wrapper>
           <Wrapper
-           width={`50%`}
+           width={`42%`}
            padding={`5px`}
            al={`flex-start`}
            margin={`0px 0px 0px 55px`}
           >
            {data.title}
           </Wrapper>
-          <Wrapper width={`10%`} padding={`5px`}>
+          <Wrapper width={`12%`} padding={`5px`}>
            {data.author}
           </Wrapper>
-          <Wrapper width={`10%`} padding={`5px`}>
+          <Wrapper width={`12%`} padding={`5px`}>
            {data.createdAt.substring(0, 10)}
           </Wrapper>
-          <Wrapper width={`10%`} padding={`5px`}>
+          <Wrapper width={`12%`} padding={`5px`}>
            {data.hit}
           </Wrapper>
-          <Wrapper width={`10%`} padding={`5px`}>
+          <Wrapper width={`12%`} padding={`5px`}>
            {data.recommendation}
           </Wrapper>
          </BottomBoard>
@@ -100,6 +99,40 @@ const MM03Presenter = ({
      ) : (
       <CircularIndeterminate />
      )}
+     {/**페이지 네이션 */}
+     <Wrapper ju={`flex-end`} dr={`row`}>
+      {pages && pages.length > 0 && (
+       <PagenationWrapper width={`auto`}>
+        <PagenationBtn
+         onClick={() =>
+          recomPopGallBannerDatum &&
+          prevAndNextPageChangeNoticeHandler(currentPage - 1)
+         }
+        >
+         <IoIosArrowBack />
+        </PagenationBtn>
+        {pages.map((data) => {
+         return (
+          <Pagenation
+           className={data === currentPage ? `active` : ``}
+           key={data}
+           onClick={() => changePageHandler(data)}
+          >
+           {data + 1}
+          </Pagenation>
+         );
+        })}
+        <PagenationBtn
+         onClick={() =>
+          recomPopGallBannerDatum &&
+          prevAndNextPageChangeNoticeHandler(currentPage + 1)
+         }
+        >
+         <IoIosArrowForward />
+        </PagenationBtn>
+       </PagenationWrapper>
+      )}
+     </Wrapper>
     </Wrapper>
    </Wrapper>
    <Wrapper width={`25%`}></Wrapper>

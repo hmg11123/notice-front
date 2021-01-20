@@ -64,6 +64,7 @@ const MM06Container = ({ history }) => {
  }, [movieTotalPage]);
  useEffect(() => {
   movieBannerRefetch();
+  movieAllRefetch();
  }, []);
 
  useEffect(() => {

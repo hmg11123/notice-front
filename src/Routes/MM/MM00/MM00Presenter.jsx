@@ -100,7 +100,7 @@ const WrapWrapper = styled(Wrapper)`
 
 const MM00Presenter = ({
  noticeBannerDatum,
- popularGalleryBannerDatum,
+ recomPopGallBannerDatum,
  pages,
  prevAndNextPageChangeNoticeHandler,
  currentPage,
@@ -109,6 +109,8 @@ const MM00Presenter = ({
  SoprtsBannerDatum,
  HobbyBannerDatum,
  GameBannerDatum,
+ CheckImgPathHandler,
+ moveLinkHandler,
 }) => {
  return (
   <Wrapper>
@@ -128,7 +130,7 @@ const MM00Presenter = ({
           <PagenationWrapper width={`auto`}>
            <PagenationBtn
             onClick={() =>
-             popularGalleryBannerDatum &&
+             recomPopGallBannerDatum &&
              prevAndNextPageChangeNoticeHandler(currentPage - 1)
             }
            >
@@ -147,7 +149,7 @@ const MM00Presenter = ({
            })}
            <PagenationBtn
             onClick={() =>
-             popularGalleryBannerDatum &&
+             recomPopGallBannerDatum &&
              prevAndNextPageChangeNoticeHandler(currentPage + 1)
             }
            >
@@ -159,15 +161,24 @@ const MM00Presenter = ({
        </TitleBox>
        <Wrapper dr={`row`}>
         <WrapWrapper dr={`row`}>
-         {popularGalleryBannerDatum ? (
-          popularGalleryBannerDatum.length === 0 ? (
+         {recomPopGallBannerDatum ? (
+          recomPopGallBannerDatum.length === 0 ? (
            <Wrapper>인기겔러리가 없습니다.</Wrapper>
           ) : (
-           popularGalleryBannerDatum.map((data, idx) => {
+           recomPopGallBannerDatum.map((data, idx) => {
             return (
-             <SliderBox key={idx}>
+             <SliderBox
+              key={idx}
+              onClick={() => moveLinkHandler(`Gallery_D/${data._id}`)}
+             >
               <Wrapper>
-               <ImgBox src={data.imgPath} />
+               {/* {CheckImgPathHandler} */}
+               {recomPopGallBannerDatum[idx].imgPath === "-" ? (
+                <Wrapper>사진이 없습니다</Wrapper>
+               ) : (
+                <ImgBox src={data.imgPath} />
+               )}
+               {/* <ImgBox src={data.imgPath} /> */}
                <Wrapper height={`40px`} margin={`0px 10px 0px 0px`} fw={`600`}>
                 {data.title}
                </Wrapper>
@@ -195,7 +206,12 @@ const MM00Presenter = ({
        <Wrapper width={`40%`}>
         <Wrapper bc={`#2d98da`} color={`#fff`} dr={`row`}>
          <Wrapper al={`flex-start`}>공지사항</Wrapper>
-         <ActionP width={`100px`} height={`30px`} fs={`14px`}>
+         <ActionP
+          width={`100px`}
+          height={`30px`}
+          fs={`14px`}
+          onClick={() => moveLinkHandler(`NoticeBoard`)}
+         >
           더보기
          </ActionP>
         </Wrapper>
@@ -205,9 +221,12 @@ const MM00Presenter = ({
          ) : (
           noticeBannerDatum.map((data, idx) => {
            return (
-            <BoardWrapper key={idx}>
+            <BoardWrapper
+             key={idx}
+             onClick={() => moveLinkHandler(`Notice_D/${data._id}`)}
+            >
              <Wrapper width={`200px`} padding={`none`} al={`flex-start`}>
-              {data.type}
+              {data.detailType}
              </Wrapper>
              <Wrapper
               margin={`0px 0px 0px 10px`}
@@ -216,7 +235,9 @@ const MM00Presenter = ({
              >
               {data.title}
              </Wrapper>
-             <Wrapper al={`flex-start`}>{data.createdAt}</Wrapper>
+             <Wrapper al={`flex-start`}>
+              {data.createdAt.substring(0, 10)}
+             </Wrapper>
             </BoardWrapper>
            );
           })
@@ -228,7 +249,12 @@ const MM00Presenter = ({
        <Wrapper width={`40%`} margin={`0px 0px 0px 20px`}>
         <Wrapper bc={`#2d98da`} color={`#fff`} dr={`row`}>
          <Wrapper al={`flex-start`}>스포츠</Wrapper>
-         <ActionP width={`100px`} height={`30px`} fs={`14px`}>
+         <ActionP
+          width={`100px`}
+          height={`30px`}
+          fs={`14px`}
+          onClick={() => moveLinkHandler(`SoprtsBoard`)}
+         >
           더보기
          </ActionP>
         </Wrapper>
@@ -238,7 +264,10 @@ const MM00Presenter = ({
          ) : (
           SoprtsBannerDatum.map((data, idx) => {
            return (
-            <BoardWrapper key={idx}>
+            <BoardWrapper
+             key={idx}
+             onClick={() => moveLinkHandler(`Soprts_D/${data._id}`)}
+            >
              <Wrapper
               margin={`0px 0px 0px 10px`}
               padding={`none`}
@@ -246,7 +275,9 @@ const MM00Presenter = ({
              >
               {data.title}
              </Wrapper>
-             <Wrapper al={`flex-start`}>{data.createdAt}</Wrapper>
+             <Wrapper al={`flex-start`}>
+              {data.createdAt.substring(0, 10)}
+             </Wrapper>
             </BoardWrapper>
            );
           })
@@ -262,7 +293,12 @@ const MM00Presenter = ({
        <Wrapper width={`40%`}>
         <Wrapper bc={`#2d98da`} color={`#fff`} dr={`row`}>
          <Wrapper al={`flex-start`}>취미</Wrapper>
-         <ActionP width={`100px`} height={`30px`} fs={`14px`}>
+         <ActionP
+          width={`100px`}
+          height={`30px`}
+          fs={`14px`}
+          onClick={() => moveLinkHandler(`HobbyBoard`)}
+         >
           더보기
          </ActionP>
         </Wrapper>
@@ -272,7 +308,10 @@ const MM00Presenter = ({
          ) : (
           HobbyBannerDatum.map((data, idx) => {
            return (
-            <BoardWrapper key={idx}>
+            <BoardWrapper
+             key={idx}
+             onClick={() => moveLinkHandler(`Hobby_D/${data._id}`)}
+            >
              <Wrapper
               margin={`0px 0px 0px 10px`}
               padding={`none`}
@@ -280,7 +319,9 @@ const MM00Presenter = ({
              >
               {data.title}
              </Wrapper>
-             <Wrapper al={`flex-start`}>{data.createdAt}</Wrapper>
+             <Wrapper al={`flex-start`}>
+              {data.createdAt.substring(0, 10)}
+             </Wrapper>
             </BoardWrapper>
            );
           })
@@ -292,7 +333,12 @@ const MM00Presenter = ({
        <Wrapper width={`40%`} margin={`0px 0px 0px 20px`}>
         <Wrapper bc={`#2d98da`} color={`#fff`} dr={`row`}>
          <Wrapper al={`flex-start`}>게임</Wrapper>
-         <ActionP width={`100px`} height={`30px`} fs={`14px`}>
+         <ActionP
+          width={`100px`}
+          height={`30px`}
+          fs={`14px`}
+          onClick={() => moveLinkHandler(`GameBoard`)}
+         >
           더보기
          </ActionP>
         </Wrapper>
@@ -302,7 +348,10 @@ const MM00Presenter = ({
          ) : (
           GameBannerDatum.map((data, idx) => {
            return (
-            <BoardWrapper key={idx}>
+            <BoardWrapper
+             key={idx}
+             onClick={() => moveLinkHandler(`Game_D/${data._id}`)}
+            >
              <Wrapper
               margin={`0px 0px 0px 10px`}
               padding={`none`}
@@ -310,7 +359,9 @@ const MM00Presenter = ({
              >
               {data.title}
              </Wrapper>
-             <Wrapper al={`flex-start`}>{data.createdAt}</Wrapper>
+             <Wrapper al={`flex-start`}>
+              {data.createdAt.substring(0, 10)}
+             </Wrapper>
             </BoardWrapper>
            );
           })

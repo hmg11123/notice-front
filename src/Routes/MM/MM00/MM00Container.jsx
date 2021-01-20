@@ -9,9 +9,11 @@ import {
  GET_ALL_SOPRTS,
  GET_ALL_HOBBY,
  GET_ALL_GAME,
+ GET_ALL_RECOM_POP_GALL,
 } from "./MM00Queries";
+import { Check } from "@material-ui/icons";
 
-const MM00Container = () => {
+const MM00Container = ({ history }) => {
  ////////// VARIABLE     //////////
 
  ////////// USE SATETE   //////////
@@ -38,18 +40,6 @@ const MM00Container = () => {
  });
 
  const {
-  data: popularGalleryBannerDatum,
-  loading: popularGalleryBannerLoading,
-  refetch: popularGalleryBannerRefetch,
- } = useQuery(GET_ALL_POPULAR_GALLERY, {
-  variables: {
-   searchValue,
-   limit,
-   currentPage,
-  },
- });
-
- const {
   data: SoprtsBannerDatum,
   loading: SoprtsBannerLoading,
   refetch: SoprtsBannerRefetch,
@@ -60,7 +50,17 @@ const MM00Container = () => {
    currentPage,
   },
  });
-
+ const {
+  data: recomPopGallBannerDatum,
+  loading: recomPopGallBannerLoading,
+  refetch: recomPopGallBannerRefetch,
+ } = useQuery(GET_ALL_RECOM_POP_GALL, {
+  variables: {
+   searchValue,
+   limit,
+   currentPage,
+  },
+ });
  const {
   data: HobbyBannerDatum,
   loading: HobbyBannerLoading,
@@ -93,6 +93,22 @@ const MM00Container = () => {
    limit,
   },
  });
+
+ //  const e = popularGalleryBannerDatum
+ //   ? popularGalleryBannerDatum.length === 0
+ //     ? ""
+ //     : popularGalleryBannerDatum.getAllPopularGallery.length
+ //   : "";
+ //  for (let i = 0; i < e; i++) {
+ //   const a = popularGalleryBannerDatum
+ //    ? popularGalleryBannerDatum.length === 0
+ //      ? ""
+ //      : popularGalleryBannerDatum.getAllPopularGallery[i].imgPath
+ //    : "";
+ //  }
+ //  console.log(a);
+
+ //  console.log(CheckImgPathHandler);
  ////////// USE MUTATION //////////
 
  ////////// USE EFFECT   //////////
@@ -114,13 +130,13 @@ const MM00Container = () => {
   }
  }, [popularGalleryTotalPage]);
  useEffect(() => {
-  popularGalleryBannerRefetch();
+  recomPopGallBannerRefetch();
  }, []);
 
  useEffect(() => {
   // noticeDatumRefetch();
 
-  popularGalleryBannerRefetch();
+  recomPopGallBannerRefetch();
   if (popularGalleryTotalPage && !pages) {
    const temp = [];
 
@@ -140,6 +156,10 @@ const MM00Container = () => {
  };
 
  //////// - EVENT HANDLER- ////////
+ const moveLinkHandler = (link) => {
+  history.push(`/${link}`);
+ };
+
  const prevAndNextPageChangeNoticeHandler = (page) => {
   if (page < 0) {
    toast.error("첫 페이지 입니다.");
@@ -157,8 +177,8 @@ const MM00Container = () => {
  return (
   <MM00Presenter
    noticeBannerDatum={noticeBannerDatum && noticeBannerDatum.getAllNotice}
-   popularGalleryBannerDatum={
-    popularGalleryBannerDatum && popularGalleryBannerDatum.getAllPopularGallery
+   recomPopGallBannerDatum={
+    recomPopGallBannerDatum && recomPopGallBannerDatum.getAllRecomPopGall
    }
    SoprtsBannerDatum={SoprtsBannerDatum && SoprtsBannerDatum.getAllSoprts}
    HobbyBannerDatum={HobbyBannerDatum && HobbyBannerDatum.getAllHobby}
@@ -166,6 +186,7 @@ const MM00Container = () => {
    //    popularGalleryTotalPage={popularGalleryTotalPage}
    limit={limit}
    searchValue={searchValue}
+   moveLinkHandler={moveLinkHandler}
    setSearchValue={setSearchValue}
    currentPage={currentPage}
    setCurrentPage={setCurrentPage}

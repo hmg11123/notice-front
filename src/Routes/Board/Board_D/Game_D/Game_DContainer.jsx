@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Game_DPresenter from "./Game_DPresenter";
-import { GET_GAME_BOARD, DELETE_GAME, UPDATE_GAME } from "./Game_DQueries";
+import {
+ GET_GAME_BOARD,
+ DELETE_GAME,
+ UPDATE_GAME,
+ RECOMMENDATION_UP,
+} from "./Game_DQueries";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import { toast } from "react-toastify";
 import useInput from "../../../../Hooks/useInput";
@@ -16,6 +21,8 @@ const Game_DContainer = ({ match, history }) => {
   title: "",
   desc: "",
  });
+
+ const user = useState(window.sessionStorage.getItem(`login`));
  const [imagePath, setImagePath] = useState(``);
  const userkey = match.params.key;
  const [currentData, setCurrentData] = useState(null);
@@ -41,6 +48,7 @@ const Game_DContainer = ({ match, history }) => {
  });
 
  const [updateGameMutation] = useMutation(UPDATE_GAME);
+ const [recommendationUpMutation] = useMutation(RECOMMENDATION_UP);
 
  ///////////// - EVENT HANDLER- ////////////
  const _valueChangeHandler = (event) => {
@@ -69,7 +77,7 @@ const Game_DContainer = ({ match, history }) => {
   const key = sessionStorage.getItem(`login`);
   if (JSON.parse(key).getUser.nickName === gameData.getGameBoard.author) {
    const { data } = await deleteGameMutation();
-   if (data.deleteGame) {
+   if (data) {
     moveLinkHandler("Game");
     toast.info(`게시글이 성공적으로 삭제되었습니다`);
    }
@@ -90,18 +98,36 @@ const Game_DContainer = ({ match, history }) => {
      imgPath: imagePath,
     },
    });
-   if (data.updateGame) {
+   console.log(data);
+   if (data) {
     toast.info("게시글이 수정되었습니다");
+    gameRefetch();
+    setIsDialogOpen(false);
    } else {
     toast.error("다시 시도해주세요");
    }
-   moveLinkHandler(`Board_D/${userkey}`);
   } else {
    moveLinkHandler("SignIN");
    toast.error("로그인 후 이용해주세요");
   }
  };
 
+ const recommendationUpHandler = async () => {
+  console.log(gameData.getGameBoard.recomUser.length);
+  console.log(JSON.parse(user[0]).getUser._id);
+  if (gameData.getGameBoard.recomUser !== JSON.parse(user[0]).getUser._id) {
+   const { data } = await recommendationUpMutation({
+    variables: {
+     id: userkey,
+     recommendation: gameData.getGameBoard.recomUser.length,
+     recomUser: JSON.parse(user[0]).getUser._id,
+    },
+   });
+   toast.info("추천하셨습니다.");
+  } else {
+   toast.error("이미 추천하셧습니다");
+  }
+ };
  const fileChangeHandler = async (e) => {
   const originFile = e.target.files[0];
   const originFileName = e.target.files[0].name;
@@ -150,6 +176,7 @@ const Game_DContainer = ({ match, history }) => {
   <Game_DPresenter
    gameData={gameData && gameData.getGameBoard}
    imagePath={imagePath}
+   recommendationUpHandler={recommendationUpHandler}
    _valueChangeHandler={_valueChangeHandler}
    updateHandler={updateHandler}
    deleteHandler={deleteHandler}

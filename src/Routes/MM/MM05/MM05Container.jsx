@@ -64,6 +64,7 @@ const MM05Container = ({ history }) => {
  }, [gameTotalPage]);
  useEffect(() => {
   gameBannerRefetch();
+  gameAllRefetch();
  }, []);
 
  useEffect(() => {

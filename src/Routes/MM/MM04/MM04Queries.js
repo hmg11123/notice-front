@@ -48,3 +48,9 @@ export const GET_GALLERY_TOTAL_PAGE = gql`
   getGalleryTotalPage(limit: $limit, searchValue: $searchValue)
  }
 `;
+
+export const GALLERY_HIT_UP = gql`
+ mutation galleryHitUp($id: String!, $hit: Int!) {
+  galleryHitUp(id: $id, hit: $hit)
+ }
+`;
