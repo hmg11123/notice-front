@@ -64,8 +64,8 @@ const MM07Container = ({ history }) => {
   }
  }, [soprtsTotalPage]);
  useEffect(() => {
-  gameAllRefetch();
-  gameBannerRefetch();
+  soprtsAllRefetch();
+  soprtsBannerRefetch();
  }, []);
 
  useEffect(() => {
