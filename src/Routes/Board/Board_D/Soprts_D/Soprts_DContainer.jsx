@@ -76,7 +76,7 @@ const Soprts_DContainer = ({ match, history }) => {
 
  const deleteHandler = async () => {
   const key = sessionStorage.getItem(`login`);
-  if (JSON.parse(key).getUser.nickName === soprtsData.getSoprts.author) {
+  if (JSON.parse(key).getUser._id === soprtsData.getSoprts.detailAuthor) {
    const { data } = await deleteSoprtsMutation();
    if (data) {
     moveLinkHandler("SoprtsBoard");
@@ -90,7 +90,7 @@ const Soprts_DContainer = ({ match, history }) => {
 
  const updateHandler = async () => {
   const key = sessionStorage.getItem(`login`);
-  if (JSON.parse(key).getUser.nickName === soprtsData.getSoprts.author) {
+  if (JSON.parse(key).getUser._id === soprtsData.getSoprts.detailAuthor) {
    const { data } = await updateSoprtsMutation({
     variables: {
      id: soprtsData && soprtsData.getSoprts._id,

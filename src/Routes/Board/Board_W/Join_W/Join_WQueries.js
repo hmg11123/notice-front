@@ -5,13 +5,13 @@ export const CREATE_JOIN = gql`
   $title: String!
   $author: String!
   $description: String!
-  $imgPath: String
+  $detailAuthor: String!
  ) {
   createJoin(
    title: $title
    author: $author
    description: $description
-   imgPath: $imgPath
+   detailAuthor: $detailAuthor
   )
  }
 `;

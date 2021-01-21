@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Soprts_WPresenter from "./Soprts_WPresenter";
 import storageRef from "../../../../firebase";
 import useInput from "../../../../Hooks/useInput";
@@ -39,18 +39,16 @@ const Soprts_WContainer = ({ history }) => {
  };
 
  const writeHandler = async () => {
-  if (!imagePath) {
-   setImagePath(`-`);
-  }
   const { data } = await SoprtsMutation({
    variables: {
     title: inputTitle.value,
     author: nickName,
     description: inputDescription.value,
     imgPath: imagePath,
+    detailAuthor: JSON.parse(user[0]).getUser._id,
    },
   });
-  if (data.createSoprts) {
+  if (data) {
    toast.info("게시글이 추가되었습니다");
    setImagePath(``);
    setNickName(``);
@@ -96,6 +94,11 @@ const Soprts_WContainer = ({ history }) => {
  };
 
  ///////////// - USE EFFECT- ///////////////
+ useEffect(() => {
+  if (!imagePath) {
+   setImagePath(`-`);
+  }
+ });
 
  return (
   <Soprts_WPresenter

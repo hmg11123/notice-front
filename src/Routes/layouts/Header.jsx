@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import SearchIcon from "@material-ui/icons/Search";
+import useInput from "../../Hooks/useInput";
 import { Wrapper } from "../../Components/commonComponents";
 
 const HeaderWrapper = styled.header`
@@ -64,6 +65,8 @@ const ActionP = styled.p`
 `;
 
 const Header = ({ history }) => {
+ const inputSearch = useInput("");
+
  const moveLinkHandler = (link) => {
   history.push(`/${link}`);
  };
@@ -88,10 +91,11 @@ const Header = ({ history }) => {
      <InputWrapper
       width={`250px`}
       br={`10px 0px 0px 10px`}
-      type="text"
+      type="Search"
       placeholder={`searchBox`}
       height={`35px`}
       padding={`20px`}
+      {...inputSearch}
      />
      <InputWrapper02
       width={`50px`}

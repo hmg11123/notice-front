@@ -69,9 +69,3 @@ export const GET_POPULAR_GALLERY_TOTAL_PAGE = gql`
   getPopularGalleryTotalPage(limit: $limit, searchValue: $searchValue)
  }
 `;
-
-export const GALLERY_HIT_UP = gql`
- mutation galleryHitUp($id: String!, $hit: Int!) {
-  galleryHitUp(id: $id, hit: $hit)
- }
-`;

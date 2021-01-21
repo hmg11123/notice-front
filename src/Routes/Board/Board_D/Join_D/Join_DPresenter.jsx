@@ -68,12 +68,11 @@ const Join_DPresenter = ({
  _isDialogOpenToggle,
  isDialogOpen,
  updateHandler,
- imagePath,
+
  valueTitle,
  valueDesc,
  _valueChangeHandler,
  recommendationUpHandler,
- fileChangeHandler,
 }) => {
  return (
   <Wrapper>
@@ -110,20 +109,6 @@ const Join_DPresenter = ({
       <Wrapper al={`flex-start`} ju={`flex-start`} margin={`30px`}>
        {joinData ? (
         <Wrapper>{joinData.description}</Wrapper>
-       ) : (
-        <CircularIndeterminate />
-       )}
-       {joinData ? (
-        joinData.imgPath === "-" ? (
-         <Blank></Blank>
-        ) : (
-         <ImgBox
-          width={`300px`}
-          height={`300px`}
-          src={joinData.imgPath}
-          margin={`20px 0px`}
-         ></ImgBox>
-        )
        ) : (
         <CircularIndeterminate />
        )}
@@ -194,10 +179,6 @@ const Join_DPresenter = ({
          placeholder="수정할 제목을 쓰세요"
         />
        </Wrapper>
-       <OriginFileBtn type="file" id="uploadImg" onChange={fileChangeHandler} />
-       <FileBtn htmlFor="uploadImg" margin={`0px 0px 30px 0px`}>
-        사진추가
-       </FileBtn>
       </Wrapper>
      </Wrapper>
      <Wrapper>
@@ -212,9 +193,6 @@ const Join_DPresenter = ({
         placeholder="수정할 게시글을 쓰세요"
        />
       </Wrapper>
-     </Wrapper>
-     <Wrapper>
-      <ImgBox width={`300px`} height={`300px`} src={`${imagePath}`}></ImgBox>
      </Wrapper>
     </DialogContent>
     <DialogActions>

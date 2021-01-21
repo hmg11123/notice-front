@@ -11,25 +11,15 @@ export const GET_JOIN = gql`
    deletedAt
    author
    hit
-   imgPath
    recommendation
    recomUser
+   detailAuthor
   }
  }
 `;
 export const UPDATE_JOIN = gql`
- mutation updateJoin(
-  $id: String!
-  $title: String!
-  $description: String!
-  $imgPath: String!
- ) {
-  updateJoin(
-   id: $id
-   title: $title
-   description: $description
-   imgPath: $imgPath
-  )
+ mutation updateJoin($id: String!, $title: String!, $description: String!) {
+  updateJoin(id: $id, title: $title, description: $description)
  }
 `;
 

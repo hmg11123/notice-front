@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Movie_WPresenter from "./Movie_WPresenter";
 import storageRef from "../../../../firebase";
 import useInput from "../../../../Hooks/useInput";
@@ -39,18 +39,16 @@ const Movie_WContainer = ({ history }) => {
  };
 
  const writeHandler = async () => {
-  if (!imagePath) {
-   setImagePath(`-`);
-  }
   const { data } = await MovieMutation({
    variables: {
     title: inputTitle.value,
     author: nickName,
     description: inputDescription.value,
     imgPath: imagePath,
+    detailAuthor: JSON.parse(user[0]).getUser._id,
    },
   });
-  if (data.createMovieBoard) {
+  if (data) {
    toast.info("게시글이 추가되었습니다");
    setImagePath(``);
    setNickName(``);
@@ -96,6 +94,11 @@ const Movie_WContainer = ({ history }) => {
  };
 
  ///////////// - USE EFFECT- ///////////////
+ useEffect(() => {
+  if (!imagePath) {
+   setImagePath(`-`);
+  }
+ });
 
  return (
   <Movie_WPresenter

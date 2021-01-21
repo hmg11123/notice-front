@@ -76,7 +76,7 @@ const Movie_DContainer = ({ match, history }) => {
 
  const deleteHandler = async () => {
   const key = sessionStorage.getItem(`login`);
-  if (JSON.parse(key).getUser.nickName === movieData.getMovieBoard.author) {
+  if (JSON.parse(key).getUser._id === movieData.getMovieBoard.detailAuthor) {
    const { data } = await deleteMovieMutation();
    if (data) {
     moveLinkHandler("MovieBoard");
@@ -90,7 +90,7 @@ const Movie_DContainer = ({ match, history }) => {
 
  const updateHandler = async () => {
   const key = sessionStorage.getItem(`login`);
-  if (JSON.parse(key).getUser.nickName === movieData.getMovieBoard.author) {
+  if (JSON.parse(key).getUser._id === movieData.getMovieBoard.detailAuthor) {
    const { data } = await updateMovieMutation({
     variables: {
      id: movieData && movieData.getMovieBoard._id,

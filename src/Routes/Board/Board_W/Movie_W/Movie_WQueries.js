@@ -6,12 +6,14 @@ export const CREATE_MOVIE_Board = gql`
   $author: String!
   $description: String!
   $imgPath: String
+  $detailAuthor: String!
  ) {
   createMovieBoard(
    title: $title
    author: $author
    description: $description
    imgPath: $imgPath
+   detailAuthor: $detailAuthor
   )
  }
 `;

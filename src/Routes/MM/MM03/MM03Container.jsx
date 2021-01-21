@@ -5,7 +5,6 @@ import {
  GET_ALL_RECOM_POP_GALL,
  GET_POPULAR_GALLERY_TOTAL_PAGE,
  GET_ALL_POPULAR_GALLERY_LENGTH,
- GALLERY_HIT_UP,
  GET_GALLERY,
 } from "./MM03Queries";
 import { toast } from "react-toastify";
@@ -56,7 +55,6 @@ const MM03Container = ({ history }) => {
 
  ////////// USE MUTATION //////////
 
- const [galleryHitUpMutaion] = useMutation(GALLERY_HIT_UP);
  ////////// USE EFFECT   //////////
  useEffect(() => {
   // noticeDatumRefetch();

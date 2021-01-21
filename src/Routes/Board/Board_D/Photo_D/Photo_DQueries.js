@@ -14,6 +14,7 @@ export const GET_PHOTO = gql`
    imgPath
    recommendation
    recomUser
+   detailAuthor
   }
  }
 `;

@@ -6,12 +6,14 @@ export const CREATE_GAME_BOARD = gql`
   $author: String!
   $description: String!
   $imgPath: String
+  $detailAuthor: String!
  ) {
   createGameBoard(
    title: $title
    author: $author
    description: $description
    imgPath: $imgPath
+   detailAuthor: $detailAuthor
   )
  }
 `;

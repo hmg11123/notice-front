@@ -8,14 +8,14 @@ export const GET_ALL_NOTICE = gql`
    currentPage: $currentPage
   ) {
    _id
-   type
-   detailType
    title
    description
-   #    author
    createdAt
    isDelete
+   author
+   recommendation
    deletedAt
+   hit
   }
  }
 `;

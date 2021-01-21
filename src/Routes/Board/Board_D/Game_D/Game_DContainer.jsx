@@ -75,10 +75,10 @@ const Game_DContainer = ({ match, history }) => {
 
  const deleteHandler = async () => {
   const key = sessionStorage.getItem(`login`);
-  if (JSON.parse(key).getUser.nickName === gameData.getGameBoard.author) {
+  if (JSON.parse(key).getUser._id === gameData.getGameBoard.detailAuthor) {
    const { data } = await deleteGameMutation();
    if (data) {
-    moveLinkHandler("Game");
+    moveLinkHandler("GameBoard");
     toast.info(`게시글이 성공적으로 삭제되었습니다`);
    }
    console.log(data);
@@ -89,7 +89,7 @@ const Game_DContainer = ({ match, history }) => {
 
  const updateHandler = async () => {
   const key = sessionStorage.getItem(`login`);
-  if (JSON.parse(key).getUser.nickName === gameData.getGameBoard.author) {
+  if (JSON.parse(key).getUser._id === gameData.getGameBoard.detailAuthor) {
    const { data } = await updateGameMutation({
     variables: {
      id: gameData && gameData.getGameBoard._id,

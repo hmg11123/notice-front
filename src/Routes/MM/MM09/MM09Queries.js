@@ -16,7 +16,6 @@ export const GET_ALL_JOIN = gql`
    recommendation
    deletedAt
    hit
-   imgPath
   }
  }
 `;
@@ -34,12 +33,7 @@ export const CREATE_JOIN = gql`
   $description: String!
   $imgPath: String
  ) {
-  createJoin(
-   title: $title
-   author: $author
-   description: $description
-   imgPath: $imgPath
-  )
+  createJoin(title: $title, author: $author, description: $description)
  }
 `;
 

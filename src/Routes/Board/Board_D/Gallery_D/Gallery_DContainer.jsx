@@ -76,7 +76,7 @@ const Gallery_DContainer = ({ match, history }) => {
 
  const deleteHandler = async () => {
   const key = sessionStorage.getItem(`login`);
-  if (JSON.parse(key).getUser.nickName === galleryData.getGallery.author) {
+  if (JSON.parse(key).getUser._id === galleryData.getGallery.detailAuthor) {
    const { data } = await deleteGalleryMutation();
    if (data) {
     moveLinkHandler("gallery");
@@ -90,7 +90,8 @@ const Gallery_DContainer = ({ match, history }) => {
 
  const updateHandler = async () => {
   const key = sessionStorage.getItem(`login`);
-  if (JSON.parse(key).getUser.nickName === galleryData.getGallery.author) {
+  console.log(galleryData.getGallery._id);
+  if (JSON.parse(key).getUser._id === galleryData.getGallery.detailAuthor) {
    const { data } = await updateGalleryMutation({
     variables: {
      id: galleryData && galleryData.getGallery._id,

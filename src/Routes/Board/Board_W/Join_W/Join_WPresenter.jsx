@@ -54,9 +54,6 @@ const Join_WPresenter = ({
       <Wrapper dr={`row`} ju={`flex-end`}>
        {/* <FileBtn margin={`0px 10px 30px 0px`}>파일추가</FileBtn> */}
        <OriginFileBtn type="file" id="uploadImg" onChange={fileChangeHandler} />
-       <FileBtn htmlFor="uploadImg" margin={`0px 0px 30px 0px`}>
-        사진추가
-       </FileBtn>
       </Wrapper>
      </Wrapper>
      <Wrapper width={`80%`} height={`10%`} al={`flex-start`}>
@@ -70,7 +67,6 @@ const Join_WPresenter = ({
       placeholder={`글을 작성해주세요.`}
       {...inputDescription}
      ></TextArea>
-     <ImgBox width={`300px`} height={`300px`} src={imagePath} />
     </Wrapper>
     <Wrapper height={`15%`} dr={`row`} ju={`flex-end`}>
      <CheckBtn

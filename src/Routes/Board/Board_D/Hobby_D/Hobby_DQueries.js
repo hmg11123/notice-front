@@ -14,6 +14,7 @@ export const GET_HOBBY = gql`
    imgPath
    recommendation
    recomUser
+   detailAuthor
   }
  }
 `;

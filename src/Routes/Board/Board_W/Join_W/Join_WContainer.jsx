@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Join_WPresenter from "./Join_WPresenter";
 import storageRef from "../../../../firebase";
 import useInput from "../../../../Hooks/useInput";
@@ -17,7 +17,6 @@ const Join_WContainer = ({ history }) => {
  const date = D.getDate() + "";
 
  const today = year + "-" + month + "-" + date;
- const [imagePath, setImagePath] = useState(``);
  const [nickName, setNickName] = useState(JSON.parse(user[0]).getUser.nickName);
  const inputTitle = useInput("");
  const inputDescription = useInput("");
@@ -39,20 +38,16 @@ const Join_WContainer = ({ history }) => {
  };
 
  const writeHandler = async () => {
-  if (!imagePath) {
-   setImagePath(`-`);
-  }
   const { data } = await JoinMutation({
    variables: {
     title: inputTitle.value,
     author: nickName,
     description: inputDescription.value,
-    imgPath: imagePath,
+    detailAuthor: JSON.parse(user[0]).getUser._id,
    },
   });
-  if (data.createJoin) {
+  if (data) {
    toast.info("게시글이 추가되었습니다");
-   setImagePath(``);
    setNickName(``);
    moveLinkHandler(`JoinBoard`);
    console.log(`추가됨`);
@@ -62,50 +57,15 @@ const Join_WContainer = ({ history }) => {
   }
  };
 
- const fileChangeHandler = async (e) => {
-  const originFile = e.target.files[0];
-  const originFileName = e.target.files[0].name;
-
-  console.log(originFile);
-  console.log(originFileName);
-
-  const D = new Date();
-
-  const year = D.getFullYear() + "";
-  const month = D.getMonth() + 1 + "";
-  const date = D.getDate() + "";
-  const hour = D.getHours() + "";
-  const min = D.getMinutes() + "";
-  const sec = D.getSeconds() + "";
-
-  const suffix = year + month + date + hour + min + sec;
-
-  const uploadFileName = originFileName + suffix;
-
-  try {
-   const storage = await storageRef.child(
-    `NOTICE/uploads/uploadImg/${uploadFileName}`
-   );
-
-   await storage.put(originFile);
-   const url = await storage.getDownloadURL();
-
-   await setImagePath(url);
-   await toast.info("사진이 추가되었습니다");
-  } catch (e) {}
- };
-
  ///////////// - USE EFFECT- ///////////////
 
  return (
   <Join_WPresenter
    inputTitle={inputTitle}
-   imagePath={imagePath}
    user={user}
    today={today}
    writeHandler={writeHandler}
    inputDescription={inputDescription}
-   fileChangeHandler={fileChangeHandler}
    cancelHandler={cancelHandler}
   ></Join_WPresenter>
  );

@@ -14,6 +14,7 @@ export const GET_MOVIE_BOARD = gql`
    imgPath
    recommendation
    recomUser
+   detailAuthor
   }
  }
 `;

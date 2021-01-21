@@ -76,7 +76,7 @@ const Hobby_DContainer = ({ match, history }) => {
 
  const deleteHandler = async () => {
   const key = sessionStorage.getItem(`login`);
-  if (JSON.parse(key).getUser.nickName === hobbyData.getHobby.author) {
+  if (JSON.parse(key).getUser._id === hobbyData.getHobby.detailAuthor) {
    const { data } = await deleteHobbyMutation();
    if (data) {
     moveLinkHandler("HobbyBoard");
@@ -90,7 +90,7 @@ const Hobby_DContainer = ({ match, history }) => {
 
  const updateHandler = async () => {
   const key = sessionStorage.getItem(`login`);
-  if (JSON.parse(key).getUser.nickName === hobbyData.getHobby.author) {
+  if (JSON.parse(key).getUser._id === hobbyData.getHobby.detailAuthor) {
    const { data } = await updateHobbyMutation({
     variables: {
      id: hobbyData && hobbyData.getHobby._id,

@@ -23,7 +23,6 @@ const Join_DContainer = ({ match, history }) => {
  });
  const user = useState(window.sessionStorage.getItem(`login`));
 
- const [imagePath, setImagePath] = useState(``);
  const userkey = match.params.key;
  const [currentData, setCurrentData] = useState(null);
  const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -75,10 +74,10 @@ const Join_DContainer = ({ match, history }) => {
 
  const deleteHandler = async () => {
   const key = sessionStorage.getItem(`login`);
-  if (JSON.parse(key).getUser.nickName === joinData.getJoin.author) {
+  if (JSON.parse(key).getUser._id === joinData.getJoin.detailAuthor) {
    const { data } = await deleteJoinMutation();
    if (data) {
-    moveLinkHandler("join");
+    moveLinkHandler("JoinBoard");
     toast.info(`게시글이 성공적으로 삭제되었습니다`);
    }
    console.log(data);
@@ -89,13 +88,12 @@ const Join_DContainer = ({ match, history }) => {
 
  const updateHandler = async () => {
   const key = sessionStorage.getItem(`login`);
-  if (JSON.parse(key).getUser.nickName === joinData.getJoin.author) {
+  if (JSON.parse(key).getUser._id === joinData.getJoin.detailAuthor) {
    const { data } = await updateJoinMutation({
     variables: {
      id: joinData && joinData.getJoin._id,
      title: value.title,
      description: value.desc,
-     imgPath: imagePath,
     },
    });
    console.log(data);
@@ -129,39 +127,6 @@ const Join_DContainer = ({ match, history }) => {
   }
  };
 
- const fileChangeHandler = async (e) => {
-  const originFile = e.target.files[0];
-  const originFileName = e.target.files[0].name;
-
-  console.log(originFile);
-  console.log(originFileName);
-  console.log(e.target.files[0].name);
-
-  const D = new Date();
-
-  const year = D.getFullYear() + "";
-  const month = D.getMonth() + 1 + "";
-  const date = D.getDate() + "";
-  const hour = D.getHours() + "";
-  const min = D.getMinutes() + "";
-  const sec = D.getSeconds() + "";
-
-  const suffix = year + month + date + hour + min + sec;
-
-  const uploadFileName = originFileName + suffix;
-
-  try {
-   const storage = storageRef.child(
-    `NOTICE/uploads/uploadImg/${uploadFileName}`
-   );
-
-   await storage.put(originFile);
-   const url = await storage.getDownloadURL();
-   setImagePath(url);
-   await toast.info("사진이 추가되었습니다");
-  } catch (e) {}
- };
-
  ///////////// - USE EFFECT- ///////////////
  useEffect(() => {
   if (joinData && joinData.getJoin) {
@@ -170,13 +135,11 @@ const Join_DContainer = ({ match, history }) => {
    //    const desc = document.getElementById("notice_description-js");
 
    setCurrentData(tempData);
-   setImagePath(tempData.imgPath);
   }
  }, [joinData]);
  return (
   <Join_DPresenter
    joinData={joinData && joinData.getJoin}
-   imagePath={imagePath}
    _valueChangeHandler={_valueChangeHandler}
    updateHandler={updateHandler}
    deleteHandler={deleteHandler}
@@ -185,7 +148,6 @@ const Join_DContainer = ({ match, history }) => {
    valueTitle={value.title}
    valueDesc={value.desc}
    recommendationUpHandler={recommendationUpHandler}
-   fileChangeHandler={fileChangeHandler}
   ></Join_DPresenter>
  );
 };

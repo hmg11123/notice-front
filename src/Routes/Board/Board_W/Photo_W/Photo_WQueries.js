@@ -6,12 +6,14 @@ export const CREATE_PHOTO = gql`
   $author: String!
   $description: String!
   $imgPath: String
+  $detailAuthor: String!
  ) {
   createPhoto(
    title: $title
    author: $author
    description: $description
    imgPath: $imgPath
+   detailAuthor: $detailAuthor
   )
  }
 `;

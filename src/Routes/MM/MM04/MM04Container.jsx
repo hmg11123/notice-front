@@ -5,7 +5,7 @@ import {
  GET_ALL_GALLERY,
  GET_GALLERY_TOTAL_PAGE,
  GET_ALL_GALLERY_LENGTH,
- GALLERY_HIT_UP,
+ //  GALLERY_HIT_UP,
 } from "./MM04Queries";
 import { toast } from "react-toastify";
 
@@ -50,7 +50,7 @@ const MM04Container = ({ history }) => {
   }
  );
  ////////// USE MUTATION //////////
- const [galleryHitUpMutaion] = useMutation(GALLERY_HIT_UP);
+ //  const [galleryHitUpMutaion] = useMutation(GALLERY_HIT_UP);
  ////////// USE EFFECT   //////////
  useEffect(() => {
   // noticeDatumRefetch();
@@ -111,9 +111,10 @@ const MM04Container = ({ history }) => {
   setCurrentPage(page);
  };
  const moveLinkHandler = async (idx) => {
-  const { data } = await galleryHitUpMutaion({
-   variables: { id: idx },
-  }).then(history.push(`/${idx}`));
+  //   const { data } = await galleryHitUpMutaion({
+  //    variables: { id: idx },
+  //   }).then(history.push(`/${idx}`));
+  history.push(`/${idx}`);
  };
  return (
   <MM04Presenter

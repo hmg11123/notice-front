@@ -76,10 +76,10 @@ const Photo_DContainer = ({ match, history }) => {
 
  const deleteHandler = async () => {
   const key = sessionStorage.getItem(`login`);
-  if (JSON.parse(key).getUser.nickName === photoData.getPhoto.author) {
+  if (JSON.parse(key).getUser._id === photoData.getPhoto.detailAuthor) {
    const { data } = await deletePhotoMutation();
    if (data) {
-    moveLinkHandler("Photo");
+    moveLinkHandler("PhotoBoard");
     toast.info(`게시글이 성공적으로 삭제되었습니다`);
    }
    console.log(data);
@@ -90,7 +90,7 @@ const Photo_DContainer = ({ match, history }) => {
 
  const updateHandler = async () => {
   const key = sessionStorage.getItem(`login`);
-  if (JSON.parse(key).getUser.nickName === photoData.getPhoto.author) {
+  if (JSON.parse(key).getUser._id === photoData.getPhoto.detailAuthor) {
    const { data } = await updatePhotoMutation({
     variables: {
      id: photoData && photoData.getPhoto._id,
@@ -104,7 +104,7 @@ const Photo_DContainer = ({ match, history }) => {
    } else {
     toast.error("다시 시도해주세요");
    }
-   moveLinkHandler(`Board_D/${userkey}`);
+   moveLinkHandler(`Photo_D/${userkey}`);
   } else {
    moveLinkHandler("SignIN");
    toast.error("로그인 후 이용해주세요");

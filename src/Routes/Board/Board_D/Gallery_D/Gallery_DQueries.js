@@ -14,6 +14,7 @@ export const GET_GALLERY = gql`
    imgPath
    recommendation
    recomUser
+   detailAuthor
   }
  }
 `;

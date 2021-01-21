@@ -14,6 +14,7 @@ export const GET_GAME_BOARD = gql`
    recomUser
    hit
    imgPath
+   detailAuthor
   }
  }
 `;
@@ -34,8 +35,8 @@ export const UPDATE_GAME = gql`
 `;
 
 export const DELETE_GAME = gql`
- mutation deleteGame($id: String!) {
-  deleteGame(id: $id)
+ mutation deleteGameBaord($id: String!) {
+  deleteGameBaord(id: $id)
  }
 `;
 

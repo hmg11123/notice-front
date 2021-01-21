@@ -6,12 +6,14 @@ export const CREATE_HOBBY = gql`
   $author: String!
   $description: String!
   $imgPath: String
+  $detailAuthor: String!
  ) {
   createHobby(
    title: $title
    author: $author
    description: $description
    imgPath: $imgPath
+   detailAuthor: $detailAuthor
   )
  }
 `;
